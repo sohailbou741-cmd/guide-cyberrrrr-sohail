@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="author" content="Sohail"/>
+<meta name="description" content="Guide complet sur la cybersécurité et la cybercriminalité par Sohail."/>
+<title>Le Guide de Sohail – Cybersécurité & Cybercriminalité</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #060a06;
+    --bg2: #0d130d;
+    --bg3: #111811;
+    --green: #00ff41;
+    --green2: #00cc33;
+    --green-dim: rgba(0,255,65,0.08);
+    --green-border: rgba(0,255,65,0.25);
+    --text: #c8d8c8;
+    --text-muted: #6a886a;
+    --red: #ff4444;
+    --amber: #ffaa00;
+    --blue: #4499ff;
+    --radius: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ---- HEADER ---- */
+  header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--green-border);
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,255,65,0.03) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,255,65,0.03) 40px);
+    pointer-events: none;
+  }
+  .header-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--green2);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+  header h1 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(22px, 5vw, 38px);
+    color: var(--green);
+    letter-spacing: 2px;
+    text-shadow: 0 0 30px rgba(0,255,65,0.3);
+    position: relative;
+    animation: glowPulse 3.5s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { text-shadow: 0 0 18px rgba(0,255,65,0.25); }
+    50% { text-shadow: 0 0 38px rgba(0,255,65,0.55); }
+  }
+  #matrix-rain {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  header h1 span { color: #fff; }
+  .header-sub {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .header-sub::before { content: '> '; color: var(--green); }
+
+  /* ---- TABS ---- */
+  .tabs-wrapper {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--green-border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs-wrapper::-webkit-scrollbar { display: none; }
+  .tabs {
+    display: flex;
+    min-width: max-content;
+    padding: 0 16px;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    padding: 14px 20px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+  .tab-btn:hover { color: var(--green); }
+  .tab-btn.active {
+    color: var(--green);
+    border-bottom-color: var(--green);
+  }
+  .tab-btn .icon { margin-right: 6px; font-size: 14px; }
+
+  /* ---- CONTENT ---- */
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 36px 20px 60px;
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fadeInUp 0.45s ease; }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- SECTION TITLES ---- */
+  .section-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 20px;
+    color: var(--green);
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+  .section-lead {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-bottom: 28px;
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .section-lead::before { content: '// '; }
+
+  /* ---- CARDS ---- */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover { border-color: rgba(0,255,65,0.45); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
+  .card-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-title .badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .badge-red { background: rgba(255,68,68,0.15); color: var(--red); border: 1px solid rgba(255,68,68,0.3); }
+  .badge-amber { background: rgba(255,170,0,0.12); color: var(--amber); border: 1px solid rgba(255,170,0,0.3); }
+  .badge-green { background: rgba(0,255,65,0.08); color: var(--green2); border: 1px solid rgba(0,255,65,0.25); }
+  .badge-blue { background: rgba(68,153,255,0.1); color: var(--blue); border: 1px solid rgba(68,153,255,0.3); }
+
+  /* ---- GRID ---- */
+  .grid2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  /* ---- ATTACK ITEMS ---- */
+  .attack-item {
+    background: var(--bg2);
+    border: 1px solid var(--green-border);
+    border-left: 3px solid var(--red);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .attack-item:hover { transform: translateX(3px); border-color: rgba(0,255,65,0.45); }
+  .attack-item.warn { border-left-color: var(--amber); }
+  .attack-item.info { border-left-color: var(--blue); }
+  .attack-name {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 5px;
+  }
+  .attack-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+  }
+  .attack-header .attack-name { margin-bottom: 0; }
+  .attack-arrow {
+    color: var(--text-muted);
+    font-size: 11px;
+    flex-shrink: 0;
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+  .attack-item.open .attack-arrow { transform: rotate(180deg); color: var(--green); }
+  .attack-summary { font-size: 13px; margin-top: 6px; margin-bottom: 0; }
+  .attack-detail {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.3s ease, margin-top 0.3s ease;
+  }
+  .attack-item.open .attack-detail { max-height: 600px; opacity: 1; margin-top: 12px; }
+  .attack-detail-row {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    padding: 8px 0;
+    border-top: 1px dashed rgba(0,255,65,0.12);
+  }
+  .attack-detail-row:first-child { border-top: none; padding-top: 0; }
+  .attack-detail-row strong { color: var(--text); font-weight: 600; }
+
+  /* ---- TIPS LIST ---- */
+  .tip-list { list-style: none; }
+  .tip-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,255,65,0.07);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .tip-list li:last-child { border-bottom: none; }
+  .tip-icon {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--green);
+    font-size: 12px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ---- LAW ITEMS ---- */
+  .law-item {
+    background: var(--bg2);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .law-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    background: var(--green-dim);
+    border: 1px solid var(--green-border);
+    border-radius: 4px;
+    padding: 4px 8px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .law-title { font-weight: 600; color: #fff; margin-bottom: 4px; font-size: 14px; }
+  .law-desc { font-size: 13px; color: var(--text-muted); }
+
+  /* ---- TERMINAL BLOCK ---- */
+  .terminal {
+    background: #020502;
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--green);
+    margin-bottom: 20px;
+    line-height: 1.9;
+  }
+  .terminal .prompt { color: var(--text-muted); }
+  .terminal .output { color: #88cc88; }
+
+  /* ---- STAT BOXES ---- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .stat-box {
+    background: var(--bg2);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 24px;
+    color: var(--green);
+    display: block;
+  }
+  .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+  /* ---- QUIZ ---- */
+  .quiz-q {
+    background: var(--bg2);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .quiz-q-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+  .quiz-q-num {
+    color: var(--green);
+    margin-right: 8px;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt {
+    background: var(--bg3);
+    border: 1px solid rgba(0,255,65,0.15);
+    border-radius: 4px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text);
+    transition: all 0.15s;
+    text-align: left;
+  }
+  .quiz-opt:hover { border-color: var(--green); color: #fff; background: var(--green-dim); }
+  .quiz-opt.correct { border-color: var(--green2); background: rgba(0,255,65,0.1); color: var(--green); }
+  .quiz-opt.wrong { border-color: var(--red); background: rgba(255,68,68,0.08); color: var(--red); }
+  .quiz-feedback {
+    margin-top: 10px;
+    font-size: 13px;
+    font-family: 'Share Tech Mono', monospace;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { color: var(--green2); }
+  .quiz-feedback.ko { color: var(--red); }
+  .quiz-score-bar {
+    background: var(--bg2);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    text-align: center;
+    margin-bottom: 24px;
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .quiz-score-bar span { color: var(--green); font-size: 22px; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    border-top: 1px solid var(--green-border);
+    padding: 20px;
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  footer span { color: var(--green); }
+
+  /* ---- DIVIDER ---- */
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(0,255,65,0.1);
+    margin: 28px 0;
+  }
+
+  /* ---- TIMELINE ---- */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    background: var(--green-border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 22px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 3px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--green);
+  }
+  .timeline-year {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--green);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+  .timeline-content {
+    background: var(--bg2);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+  }
+  .timeline-title { font-weight: 600; color: #fff; margin-bottom: 4px; font-size: 14px; }
+  .timeline-content p { font-size: 13px; color: var(--text-muted); margin-bottom: 0; }
+
+  /* ---- GLOSSARY ---- */
+  .glossary-search {
+    width: 100%;
+    background: var(--bg2);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .glossary-search:focus { border-color: var(--green); }
+  .glossary-search::placeholder { color: var(--text-muted); }
+  .glossary-item {
+    background: var(--bg2);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin-bottom: 10px;
+  }
+  .glossary-term {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--green);
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .glossary-def { font-size: 13px; color: var(--text); }
+
+  /* ---- WORKSHOP (ATELIER) ---- */
+  .workshop-card {
+    background: var(--bg2);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 22px;
+    margin-bottom: 10px;
+  }
+  .pwgen-output {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 17px;
+    color: var(--green);
+    background: #020502;
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    word-break: break-all;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    animation: fadeInUp 0.3s ease;
+  }
+  .copy-btn {
+    background: var(--green-dim);
+    border: 1px solid var(--green-border);
+    color: var(--green);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    padding: 7px 14px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    margin-bottom: 18px;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { background: rgba(0,255,65,0.18); }
+  .copy-btn.copied { background: rgba(0,255,65,0.25); color: #fff; }
+  .pwgen-row { margin-bottom: 14px; }
+  .pwgen-row label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .pwgen-row input[type="range"] {
+    width: 100%;
+    accent-color: var(--green);
+  }
+  .pwgen-checks { display: flex; flex-wrap: wrap; gap: 16px; }
+  .pwgen-checks label {
+    font-size: 13px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+  .pwgen-checks input[type="checkbox"] { accent-color: var(--green); width: 15px; height: 15px; }
+
+  .pwcheck-input-wrapper { display: flex; gap: 8px; margin-bottom: 14px; }
+  .pwcheck-input {
+    flex: 1;
+    background: var(--bg3);
+    border: 1px solid rgba(0,255,65,0.2);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .pwcheck-input:focus { border-color: var(--green); }
+  .pwcheck-toggle {
+    background: var(--bg3);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    padding: 0 14px;
+    font-size: 14px;
+  }
+  .pwcheck-bar {
+    height: 8px;
+    background: var(--bg3);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .pwcheck-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--red);
+    border-radius: 6px;
+    transition: width 0.4s ease, background 0.4s ease;
+  }
+  .pwcheck-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .phish-email {
+    background: var(--bg3);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 16px;
+    animation: fadeInUp 0.35s ease;
+  }
+  .phish-email-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(0,255,65,0.15);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12.5px;
+  }
+  .phish-email-header .row { display: flex; gap: 8px; margin-bottom: 4px; color: var(--text-muted); }
+  .phish-email-header .row span.val { color: var(--text); }
+  .phish-email-body { padding: 16px; font-size: 13.5px; color: var(--text); line-height: 1.6; }
+  .phish-email-body a.fakelink { color: var(--blue); text-decoration: underline; cursor: default; }
+  .phish-buttons { display: flex; gap: 10px; padding: 0 16px 16px; }
+  .phish-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: var(--radius);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid var(--green-border);
+    background: var(--bg2);
+    color: var(--text);
+    transition: all 0.2s;
+  }
+  .phish-btn:hover { border-color: var(--green); color: #fff; }
+  .phish-feedback {
+    margin: 0 16px 16px;
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    display: none;
+    animation: fadeInUp 0.3s ease;
+  }
+  .phish-feedback.show { display: block; }
+  .phish-feedback.correct { background: rgba(0,255,65,0.08); border: 1px solid rgba(0,255,65,0.3); color: var(--green2); }
+  .phish-feedback.wrong { background: rgba(255,68,68,0.08); border: 1px solid rgba(255,68,68,0.3); color: var(--red); }
+
+  /* ---- AI CHAT ---- */
+  .ai-chat-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 560px;
+    background: var(--bg2);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .ai-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--green-border) transparent;
+  }
+  .ai-chat-messages::-webkit-scrollbar { width: 4px; }
+  .ai-chat-messages::-webkit-scrollbar-thumb { background: var(--green-border); border-radius: 4px; }
+  .ai-msg {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    max-width: 85%;
+  }
+  .ai-msg.user { align-self: flex-end; flex-direction: row-reverse; }
+  .ai-msg-avatar {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--green);
+    background: var(--green-dim);
+    border: 1px solid var(--green-border);
+    border-radius: 4px;
+    padding: 3px 6px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+  .ai-msg.user .ai-msg-avatar { color: var(--blue); background: rgba(68,153,255,0.08); border-color: rgba(68,153,255,0.25); }
+  .ai-msg-bubble {
+    background: var(--bg3);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .ai-msg.user .ai-msg-bubble { border-color: rgba(68,153,255,0.25); background: rgba(68,153,255,0.05); }
+  .ai-msg-bubble strong { color: #fff; }
+  .ai-msg-bubble code {
+    font-family: 'Share Tech Mono', monospace;
+    background: rgba(0,255,65,0.06);
+    border: 1px solid var(--green-border);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 12px;
+    color: var(--green);
+  }
+  .ai-typing {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 12px 14px;
+    background: var(--bg3);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius);
+  }
+  .ai-typing span {
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: typingDot 1.2s infinite;
+    opacity: 0.4;
+  }
+  .ai-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .ai-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingDot { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
+  .ai-chat-footer {
+    display: flex;
+    gap: 10px;
+    padding: 14px 16px;
+    border-top: 1px solid var(--green-border);
+    background: var(--bg);
+  }
+  .ai-chat-input {
+    flex: 1;
+    background: var(--bg3);
+    border: 1px solid rgba(0,255,65,0.2);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+  .ai-chat-input:focus { border-color: var(--green); }
+  .ai-chat-input::placeholder { color: var(--text-muted); }
+  .ai-send-btn {
+    background: var(--green-dim);
+    border: 1px solid var(--green-border);
+    color: var(--green);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    padding: 10px 18px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .ai-send-btn:hover { background: rgba(0,255,65,0.15); border-color: var(--green); }
+  .ai-send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .ai-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .ai-suggestion-btn {
+    background: var(--bg3);
+    border: 1px solid rgba(0,255,65,0.15);
+    color: var(--text-muted);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .ai-suggestion-btn:hover { color: var(--green); border-color: var(--green); }
+
+  p { margin-bottom: 12px; color: var(--text); }
+  strong { color: #fff; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header>
+  <canvas id="matrix-rain"></canvas>
+  <div class="header-tag">[ GUIDE OFFICIEL – v3.0 ]</div>
+  <h1>Le guide de <span>Sohail</span></h1>
+  <div class="header-sub">Cybersécurité &amp; Cybercriminalité – de A à Z</div>
+</header>
+
+<div class="tabs-wrapper">
+  <nav class="tabs" role="tablist">
+    <button class="tab-btn active" onclick="switchTab('accueil', this)" role="tab"><span class="icon">🏠</span>Accueil</button>
+    <button class="tab-btn" onclick="switchTab('cybersec', this)" role="tab"><span class="icon">🛡️</span>Cybersécurité</button>
+    <button class="tab-btn" onclick="switchTab('cybercrime', this)" role="tab"><span class="icon">⚠️</span>Cybercriminalité</button>
+    <button class="tab-btn" onclick="switchTab('attaques', this)" role="tab"><span class="icon">🦠</span>Types d'attaques</button>
+    <button class="tab-btn" onclick="switchTab('protection', this)" role="tab"><span class="icon">🔒</span>Se protéger</button>
+    <button class="tab-btn" onclick="switchTab('lois', this)" role="tab"><span class="icon">⚖️</span>Lois & peines</button>
+    <button class="tab-btn" onclick="switchTab('historique', this)" role="tab"><span class="icon">📜</span>Historique</button>
+    <button class="tab-btn" onclick="switchTab('glossaire', this)" role="tab"><span class="icon">📖</span>Glossaire</button>
+    <button class="tab-btn" onclick="switchTab('outils', this)" role="tab"><span class="icon">🧰</span>Outils</button>
+    <button class="tab-btn" onclick="switchTab('atelier', this)" role="tab"><span class="icon">🧪</span>Atelier</button>
+    <button class="tab-btn" onclick="switchTab('carrieres', this)" role="tab"><span class="icon">🎓</span>Carrières</button>
+    <button class="tab-btn" onclick="switchTab('quiz', this)" role="tab"><span class="icon">🧠</span>Quiz</button>
+    <button class="tab-btn" onclick="switchTab('ai', this)" role="tab"><span class="icon">🤖</span>IA Assistant</button>
+  </nav>
+</div>
+
+<main class="content">
+
+  <!-- =================== ACCUEIL =================== -->
+  <section class="tab-panel active" id="accueil">
+    <div class="section-title">Bienvenue sur le guide</div>
+    <div class="section-lead">portail de connaissances en cybersécurité par Sohail</div>
+
+    <div class="terminal">
+      <div><span class="prompt">sohail@guide:~$ </span>whoami</div>
+      <div class="output">Passionné de cybersécurité | S21</div>
+      <div><span class="prompt">sohail@guide:~$ </span>cat mission.txt</div>
+      <div class="output">Comprendre, sensibiliser, se protéger.</div>
+      <div><span class="prompt">sohail@guide:~$ </span><span style="animation: blink 1s step-end infinite">█</span></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-box"><span class="stat-num">17+</span><div class="stat-label">Types d'attaques couvertes</div></div>
+      <div class="stat-box"><span class="stat-num">20</span><div class="stat-label">Questions quiz</div></div>
+      <div class="stat-box"><span class="stat-num">9</span><div class="stat-label">Lois françaises</div></div>
+      <div class="stat-box"><span class="stat-num">40+</span><div class="stat-label">Termes du glossaire</div></div>
+      <div class="stat-box"><span class="stat-num">12</span><div class="stat-label">Cyberattaques historiques</div></div>
+      <div class="stat-box"><span class="stat-num">∞</span><div class="stat-label">Savoir à acquérir</div></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">🛡️ Cybersécurité <span class="badge badge-green">ESSENTIEL</span></div>
+        <p>Tout ce que tu dois savoir pour protéger tes données, ton réseau et tes appareils contre les menaces numériques.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">⚠️ Cybercriminalité <span class="badge badge-red">DANGER</span></div>
+        <p>Les infractions numériques, comment elles fonctionnent, qui elles visent et pourquoi elles sont punies par la loi.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🦠 Types d'attaques <span class="badge badge-amber">TECHNIQUE</span></div>
+        <p>Phishing, ransomware, malware, DDoS, deepfake, supply chain... Comprends chaque menace pour mieux t'en défendre.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🔒 Se protéger <span class="badge badge-green">PRATIQUE</span></div>
+        <p>Mots de passe, 2FA, mobile, télétravail, enfants en ligne, réaction en cas d'attaque : tous les bons réflexes.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">⚖️ Lois & peines <span class="badge badge-blue">JURIDIQUE</span></div>
+        <p>Ce que dit la loi française sur la cybercriminalité et les risques réels pour ceux qui franchissent la ligne.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">📜 Historique <span class="badge badge-amber">CULTURE</span></div>
+        <p>Les cyberattaques qui ont marqué l'histoire d'Internet, de Morris Worm à SolarWinds.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">📖 Glossaire <span class="badge badge-blue">RÉFÉRENCE</span></div>
+        <p>Plus de 40 termes techniques expliqués simplement, avec une barre de recherche.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🧰 Outils <span class="badge badge-green">RESSOURCES</span></div>
+        <p>Gestionnaires de mots de passe, VPN, antivirus, sites officiels pour signaler ou vérifier une fuite.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🎓 Carrières <span class="badge badge-amber">AVENIR</span></div>
+        <p>Métiers, certifications (CEH, OSCP, CISSP...) et parcours pour se lancer dans la cybersécurité.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🤖 IA Assistant <span class="badge badge-blue">INTERACTIF</span></div>
+        <p>Pose tes questions en direct à un assistant spécialisé en cybersécurité et cybercriminalité.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== CYBERSÉCURITÉ =================== -->
+  <section class="tab-panel" id="cybersec">
+    <div class="section-title">Cybersécurité</div>
+    <div class="section-lead">protéger les systèmes, les réseaux et les données</div>
+
+    <p>La <strong>cybersécurité</strong> désigne l'ensemble des méthodes, technologies et bonnes pratiques mises en place pour protéger les systèmes informatiques, les réseaux, les serveurs, les appareils mobiles et les données contre les attaques numériques.</p>
+
+    <hr class="divider"/>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">Les 3 piliers fondamentaux — CIA</div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">🔏 Confidentialité <span class="badge badge-blue">C</span></div>
+        <p>Seules les personnes autorisées peuvent accéder aux informations. Le chiffrement et les droits d'accès garantissent cela.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">✅ Intégrité <span class="badge badge-green">I</span></div>
+        <p>Les données ne peuvent pas être modifiées sans autorisation. Les signatures numériques permettent de vérifier l'intégrité.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">📡 Disponibilité <span class="badge badge-amber">A</span></div>
+        <p>Les systèmes et les données restent accessibles aux utilisateurs légitimes. Les sauvegardes et la redondance garantissent cela.</p>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">Les domaines de la cybersécurité</div>
+
+    <div class="attack-item info">
+      <div class="attack-name">Sécurité des réseaux</div>
+      <p style="font-size:13px;">Protection des infrastructures réseau contre les intrusions, écoutes et attaques (pare-feu, VPN, IDS/IPS).</p>
+    </div>
+    <div class="attack-item info">
+      <div class="attack-name">Sécurité des applications</div>
+      <p style="font-size:13px;">Assurer que les logiciels et apps ne contiennent pas de failles exploitables (tests de pénétration, code review).</p>
+    </div>
+    <div class="attack-item info">
+      <div class="attack-name">Sécurité des données</div>
+      <p style="font-size:13px;">Protéger les données au repos et en transit via le chiffrement (AES, TLS/SSL) et la gestion des accès.</p>
+    </div>
+    <div class="attack-item info">
+      <div class="attack-name">Sécurité opérationnelle (OPSEC)</div>
+      <p style="font-size:13px;">Processus et décisions pour protéger les actifs numériques : gestion des permissions, politiques de sécurité.</p>
+    </div>
+    <div class="attack-item info">
+      <div class="attack-name">Réponse aux incidents</div>
+      <p style="font-size:13px;">Plan d'action en cas de violation de sécurité : détection, containment, récupération, post-mortem.</p>
+    </div>
+    <div class="attack-item info">
+      <div class="attack-name">Sécurité Cloud</div>
+      <p style="font-size:13px;">Protection des environnements hébergés (AWS, Azure, GCP) : modèle de responsabilité partagée, configuration des accès, chiffrement des buckets.</p>
+    </div>
+    <div class="attack-item info">
+      <div class="attack-name">Gestion des identités et accès (IAM)</div>
+      <p style="font-size:13px;">Contrôler qui a accès à quoi : principe du moindre privilège, SSO, gestion des comptes à privilèges (PAM).</p>
+    </div>
+    <div class="attack-item info">
+      <div class="attack-name">Sécurité des objets connectés (IoT)</div>
+      <p style="font-size:13px;">Caméras, montres, électroménager connecté : souvent mal sécurisés et utilisés comme porte d'entrée sur un réseau.</p>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">Le modèle Zero Trust</div>
+    <p>L'approche <strong>Zero Trust</strong> ("ne jamais faire confiance, toujours vérifier") part du principe qu'aucun utilisateur ou appareil, même à l'intérieur du réseau, n'est automatiquement fiable. Chaque accès est vérifié en continu (identité, appareil, contexte) avant d'être autorisé. C'est aujourd'hui la référence pour sécuriser les entreprises modernes.</p>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">Normes et référentiels</div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">📋 ISO 27001 <span class="badge badge-blue">NORME</span></div>
+        <p>Norme internationale de management de la sécurité de l'information (SMSI), utilisée pour certifier les entreprises.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🇺🇸 NIST Cybersecurity Framework <span class="badge badge-blue">RÉFÉRENTIEL</span></div>
+        <p>Cadre américain structuré en 5 fonctions : Identifier, Protéger, Détecter, Répondre, Récupérer.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🇫🇷 ANSSI <span class="badge badge-green">FRANCE</span></div>
+        <p>Agence nationale de la sécurité des systèmes d'information : référent en France pour la cyberdéfense des administrations et entreprises.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🇪🇺 RGPD <span class="badge badge-amber">RÈGLEMENT</span></div>
+        <p>Règlement Général sur la Protection des Données : encadre la collecte et le traitement des données personnelles en Europe.</p>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">Le SOC : centre des opérations de sécurité</div>
+    <p>Un <strong>SOC (Security Operations Center)</strong> est une équipe dédiée qui surveille en permanence (24/7) les systèmes d'une organisation pour détecter, analyser et répondre aux incidents de sécurité. Elle utilise des outils comme les <strong>SIEM</strong> (Security Information and Event Management) pour centraliser et corréler les alertes.</p>
+  </section>
+
+  <!-- =================== CYBERCRIMINALITÉ =================== -->
+  <section class="tab-panel" id="cybercrime">
+    <div class="section-title">Cybercriminalité</div>
+    <div class="section-lead">comprendre les infractions numériques pour mieux s'en prémunir</div>
+
+    <p>La <strong>cybercriminalité</strong> regroupe toutes les infractions commises à l'aide d'outils informatiques ou via Internet. Elle peut viser des individus, des entreprises ou des gouvernements entiers.</p>
+
+    <div class="stats">
+      <div class="stat-box"><span class="stat-num" style="color:var(--red)">+40%</span><div class="stat-label">Hausse des cyberattaques depuis 2020</div></div>
+      <div class="stat-box"><span class="stat-num" style="color:var(--amber)">90%</span><div class="stat-label">Des attaques commencent par un email</div></div>
+      <div class="stat-box"><span class="stat-num" style="color:var(--red)">4,45M$</span><div class="stat-label">Coût moyen d'une violation de données</div></div>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">Qui sont les cybercriminels ?</div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">🎭 Script Kiddies <span class="badge badge-amber">DÉBUTANT</span></div>
+        <p>Personnes peu qualifiées qui utilisent des outils existants sans vraiment comprendre leur fonctionnement.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">💼 Hackers organisés <span class="badge badge-red">AVANCÉ</span></div>
+        <p>Groupes criminels structurés visant des profits financiers massifs via ransomwares, fraudes, vols de données.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🏴 Hacktivistes <span class="badge badge-blue">IDÉOLOGIQUE</span></div>
+        <p>Hackers motivés par des causes politiques ou sociales. Ciblent des institutions ou entreprises pour transmettre un message.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🏛️ Acteurs étatiques <span class="badge badge-red">CRITIQUE</span></div>
+        <p>Groupes financés par des États pour espionnage, sabotage ou déstabilisation d'autres nations (cyberguerre).</p>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">Cibles principales</div>
+    <div class="attack-item warn">
+      <div class="attack-name">Particuliers</div>
+      <p style="font-size:13px;">Vol d'identité, fraude bancaire, chantage, harcèlement en ligne, arnaques e-commerce.</p>
+    </div>
+    <div class="attack-item warn">
+      <div class="attack-name">Entreprises & PME</div>
+      <p style="font-size:13px;">Espionnage industriel, ransomware, vol de données clients, sabotage de production.</p>
+    </div>
+    <div class="attack-item">
+      <div class="attack-name">Infrastructures critiques</div>
+      <p style="font-size:13px;">Hôpitaux, centrales électriques, réseaux d'eau, systèmes bancaires. Les conséquences peuvent être mortelles.</p>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">🌑 Le Dark Web</div>
+    <p>Le <strong>Dark Web</strong> est une partie d'Internet non indexée par les moteurs de recherche classiques, accessible via des outils spécifiques comme <strong>Tor</strong>. Il ne faut pas le confondre avec le <strong>Deep Web</strong> (tout contenu non indexé, comme ta boîte mail) qui représente l'immense majorité du web "caché" et n'a rien d'illégal en soi.</p>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">🛒 Marketplaces illégales <span class="badge badge-red">CRIME</span></div>
+        <p>Vente de données volées, identifiants, malwares, drogues, faux documents, accès à des systèmes piratés.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🗞️ Usages légitimes <span class="badge badge-blue">LÉGAL</span></div>
+        <p>Journalistes, lanceurs d'alerte et dissidents l'utilisent aussi pour communiquer en échappant à la censure ou à la surveillance.</p>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">💰 Cybercriminalité financière</div>
+    <div class="attack-item warn">
+      <div class="attack-name">Crypto-monnaies & cybercrime</div>
+      <p style="font-size:13px;">Les rançons sont souvent exigées en Bitcoin ou Monero pour leur difficulté de traçabilité relative. Le <strong>blanchiment</strong> passe par des mélangeurs ("mixers") et des échanges peu régulés.</p>
+    </div>
+    <div class="attack-item warn">
+      <div class="attack-name">Arnaques à l'investissement</div>
+      <p style="font-size:13px;">Fausses plateformes de trading crypto promettant des rendements irréalistes. Des milliers de victimes chaque année en France, souvent des personnes âgées.</p>
+    </div>
+    <div class="attack-item warn">
+      <div class="attack-name">Fraude au virement (arnaque au président)</div>
+      <p style="font-size:13px;">Usurpation de l'identité d'un dirigeant pour ordonner un virement urgent et confidentiel à un comptable ou employé.</p>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">🧍 Cybercriminalité contre les personnes</div>
+    <div class="attack-item">
+      <div class="attack-name">Cyberharcèlement</div>
+      <p style="font-size:13px;">Harcèlement répété en ligne (messages, rumeurs, montages) pouvant avoir des conséquences psychologiques graves. Puni par l'article 222-33-2-2 du Code pénal.</p>
+    </div>
+    <div class="attack-item">
+      <div class="attack-name">Sextorsion</div>
+      <p style="font-size:13px;">Chantage basé sur des images ou vidéos intimes (réelles ou truquées) pour extorquer de l'argent ou des faveurs. Il faut toujours en parler à un adulte de confiance ou aux autorités, jamais payer ni céder.</p>
+    </div>
+    <div class="attack-item">
+      <div class="attack-name">Cyberstalking</div>
+      <p style="font-size:13px;">Surveillance et traque numérique d'une personne (réseaux sociaux, géolocalisation) pouvant déboucher sur du harcèlement physique.</p>
+    </div>
+  </section>
+
+  <!-- =================== ATTAQUES =================== -->
+  <section class="tab-panel" id="attaques">
+    <div class="section-title">Types d'attaques</div>
+    <div class="section-lead">clique sur une attaque pour voir le détail : fonctionnement, signes d'alerte et protection</div>
+    <div id="attacks-container"></div>
+  </section>
+
+  <!-- =================== PROTECTION =================== -->
+  <section class="tab-panel" id="protection">
+    <div class="section-title">Se protéger</div>
+    <div class="section-lead">les bonnes pratiques essentielles pour ta sécurité numérique</div>
+
+    <div class="terminal">
+      <div class="output">[✓] Niveau de protection actuel : À AMÉLIORER</div>
+      <div class="output">[!] Appliquer les mesures ci-dessous pour sécuriser ton espace numérique</div>
+    </div>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;color:#fff;margin-bottom:14px;">🔑 Mots de passe</div>
+    <ul class="tip-list" style="margin-bottom:22px;">
+      <li><span class="tip-icon">[+]</span><div>Utilise des mots de passe <strong>longs (16+ caractères)</strong> avec majuscules, chiffres et symboles.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Ne jamais réutiliser le même mot de passe sur plusieurs sites.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Utilise un <strong>gestionnaire de mots de passe</strong> : Bitwarden, KeePass, 1Password.</div></li>
+      <li><span class="tip-icon">[!]</span><div>Ne jamais partager son mot de passe, même avec un "support technique".</div></li>
+    </ul>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;color:#fff;margin-bottom:14px;">📱 Double authentification (2FA)</div>
+    <ul class="tip-list" style="margin-bottom:22px;">
+      <li><span class="tip-icon">[+]</span><div>Active le <strong>2FA sur tous tes comptes importants</strong> : email, banque, réseaux sociaux.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Préfère une application d'authentification (Google Authenticator, Authy) au SMS.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Le 2FA bloque 99,9% des tentatives de piratage automatisées.</div></li>
+    </ul>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;color:#fff;margin-bottom:14px;">🌐 Navigation & Réseaux</div>
+    <ul class="tip-list" style="margin-bottom:22px;">
+      <li><span class="tip-icon">[+]</span><div>Vérifie toujours le <strong>cadenas HTTPS</strong> avant de saisir des informations sensibles.</div></li>
+      <li><span class="tip-icon">[!]</span><div>Évite les <strong>Wi-Fi publics non sécurisés</strong>. Utilise un VPN si nécessaire.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Ne clique jamais sur des liens suspects reçus par email ou SMS.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Utilise un bloqueur de publicités (uBlock Origin) pour limiter les trackers.</div></li>
+    </ul>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;color:#fff;margin-bottom:14px;">💻 Ton appareil</div>
+    <ul class="tip-list" style="margin-bottom:22px;">
+      <li><span class="tip-icon">[+]</span><div><strong>Mets à jour régulièrement</strong> ton OS et tes applications. Les mises à jour corrigent des failles.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Installe un antivirus fiable et active le pare-feu système.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Chiffre ton disque dur (BitLocker sur Windows, FileVault sur Mac).</div></li>
+      <li><span class="tip-icon">[+]</span><div>Effectue des <strong>sauvegardes régulières</strong> sur un support externe ou cloud chiffré.</div></li>
+    </ul>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;color:#fff;margin-bottom:14px;">🧠 Comportement en ligne</div>
+    <ul class="tip-list">
+      <li><span class="tip-icon">[!]</span><div>Limite les <strong>informations personnelles partagées</strong> sur les réseaux sociaux.</div></li>
+      <li><span class="tip-icon">[!]</span><div>Méfie-toi des arnaques : si c'est trop beau pour être vrai, c'est une arnaque.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Vérifie l'adresse email de l'expéditeur avant de répondre à tout message suspect.</div></li>
+    </ul>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;color:#fff;margin-bottom:14px;">📲 Sécurité mobile</div>
+    <ul class="tip-list" style="margin-bottom:22px;">
+      <li><span class="tip-icon">[+]</span><div>Ne télécharge des applications que depuis les <strong>stores officiels</strong> (App Store, Google Play).</div></li>
+      <li><span class="tip-icon">[+]</span><div>Vérifie les <strong>permissions demandées</strong> par une app (caméra, micro, contacts) avant d'installer.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Active le verrouillage par code PIN, empreinte ou reconnaissance faciale.</div></li>
+      <li><span class="tip-icon">[!]</span><div>Désactive le Bluetooth et le Wi-Fi quand tu ne les utilises pas.</div></li>
+    </ul>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;color:#fff;margin-bottom:14px;">🏢 Télétravail & entreprise</div>
+    <ul class="tip-list" style="margin-bottom:22px;">
+      <li><span class="tip-icon">[+]</span><div>Utilise un <strong>VPN d'entreprise</strong> pour accéder aux ressources internes à distance.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Verrouille ton écran dès que tu t'éloignes de ton poste, même à la maison.</div></li>
+      <li><span class="tip-icon">[!]</span><div>Ne mélange jamais comptes personnels et professionnels sur le même appareil sans cloisonnement.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Signale immédiatement tout email ou comportement suspect au service informatique.</div></li>
+    </ul>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;color:#fff;margin-bottom:14px;">👨‍👩‍👧 Protéger les enfants en ligne</div>
+    <ul class="tip-list" style="margin-bottom:22px;">
+      <li><span class="tip-icon">[+]</span><div>Mets en place un <strong>contrôle parental</strong> adapté à l'âge, sans remplacer le dialogue.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Explique-leur de ne jamais communiquer d'informations personnelles à des inconnus en ligne.</div></li>
+      <li><span class="tip-icon">[!]</span><div>Encourage-les à parler à un adulte de confiance en cas de message ou contenu gênant, sans crainte d'être puni.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Sensibilise-les aux risques du <strong>partage de photos</strong> et au cyberharcèlement.</div></li>
+    </ul>
+
+    <hr class="divider"/>
+    <div class="card" style="border-color:rgba(255,68,68,0.3);">
+      <div class="card-title">🚨 Que faire en cas d'attaque ? <span class="badge badge-red">URGENCE</span></div>
+      <ul class="tip-list">
+        <li><span class="tip-icon">[1]</span><div><strong>Isole l'appareil</strong> : déconnecte-le du réseau (Wi-Fi, câble) pour stopper la propagation.</div></li>
+        <li><span class="tip-icon">[2]</span><div><strong>Ne paie jamais une rançon</strong> : cela ne garantit rien et finance les criminels.</div></li>
+        <li><span class="tip-icon">[3]</span><div>Change tes <strong>mots de passe</strong> depuis un autre appareil sain.</div></li>
+        <li><span class="tip-icon">[4]</span><div><strong>Porte plainte</strong> et signale l'incident sur <code style="background:rgba(0,255,65,0.06);padding:1px 5px;border-radius:3px;color:var(--green2);">cybermalveillance.gouv.fr</code> ou auprès de la gendarmerie/police.</div></li>
+        <li><span class="tip-icon">[5]</span><div>Restaure tes données depuis une <strong>sauvegarde saine</strong> antérieure à l'infection.</div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- =================== LOIS =================== -->
+  <section class="tab-panel" id="lois">
+    <div class="section-title">Lois & peines</div>
+    <div class="section-lead">ce que dit le droit français sur la cybercriminalité</div>
+
+    <p>En France, la cybercriminalité est <strong>sévèrement punie par la loi</strong>. Plusieurs textes encadrent les infractions numériques. L'ignorance de la loi n'est jamais une excuse.</p>
+
+    <hr class="divider"/>
+
+    <div class="law-item">
+      <div class="law-num">Art. 323-1</div>
+      <div>
+        <div class="law-title">Accès non autorisé à un système informatique</div>
+        <div class="law-desc">Accéder ou se maintenir frauduleusement dans un système d'information est puni de <strong style="color:var(--amber)">2 ans d'emprisonnement et 60 000 € d'amende</strong>. Avec modification ou suppression de données : 3 ans et 100 000 €.</div>
+      </div>
+    </div>
+    <div class="law-item">
+      <div class="law-num">Art. 323-2</div>
+      <div>
+        <div class="law-title">Entrave au fonctionnement d'un système</div>
+        <div class="law-desc">Attaques DDoS, sabotage : <strong style="color:var(--amber)">5 ans d'emprisonnement et 150 000 € d'amende</strong>.</div>
+      </div>
+    </div>
+    <div class="law-item">
+      <div class="law-num">Art. 226-16</div>
+      <div>
+        <div class="law-title">Violation des données personnelles (RGPD)</div>
+        <div class="law-desc">Traitement illicite de données personnelles : jusqu'à <strong style="color:var(--amber)">5 ans et 300 000 €</strong>. Pour une entreprise : jusqu'à 4% du chiffre d'affaires mondial.</div>
+      </div>
+    </div>
+    <div class="law-item">
+      <div class="law-num">Art. 312-1</div>
+      <div>
+        <div class="law-title">Extorsion numérique (ransomware)</div>
+        <div class="law-desc">Exiger une rançon sous menace : <strong style="color:var(--red)">7 ans d'emprisonnement et 100 000 € d'amende</strong>. Avec violence ou en bande organisée : jusqu'à 20 ans.</div>
+      </div>
+    </div>
+    <div class="law-item">
+      <div class="law-num">Art. 434-15-2</div>
+      <div>
+        <div class="law-title">Refus de remettre une clé de déchiffrement</div>
+        <div class="law-desc">Refuser de donner les clés de chiffrement à la justice : <strong style="color:var(--amber)">3 ans d'emprisonnement et 270 000 €</strong>.</div>
+      </div>
+    </div>
+    <div class="law-item">
+      <div class="law-num">Art. 323-3</div>
+      <div>
+        <div class="law-title">Introduction frauduleuse de données</div>
+        <div class="law-desc">Introduire, supprimer ou modifier frauduleusement des données dans un système : <strong style="color:var(--amber)">5 ans d'emprisonnement et 150 000 €</strong>.</div>
+      </div>
+    </div>
+    <div class="law-item">
+      <div class="law-num">Art. 222-33-2-2</div>
+      <div>
+        <div class="law-title">Cyberharcèlement</div>
+        <div class="law-desc">Harcèlement moral en ligne : <strong style="color:var(--amber)">2 ans d'emprisonnement et 30 000 €</strong>, jusqu'à 3 ans en cas de "raid numérique" en groupe.</div>
+      </div>
+    </div>
+    <div class="law-item">
+      <div class="law-num">Art. 226-4-1</div>
+      <div>
+        <div class="law-title">Usurpation d'identité numérique</div>
+        <div class="law-desc">Usurper l'identité d'autrui en ligne pour troubler sa tranquillité ou porter atteinte à son honneur : <strong style="color:var(--amber)">1 an d'emprisonnement et 15 000 €</strong>.</div>
+      </div>
+    </div>
+    <div class="law-item">
+      <div class="law-num">Loi Godfrain (1988)</div>
+      <div>
+        <div class="law-title">Première loi française anti-piratage</div>
+        <div class="law-desc">Texte fondateur qui a introduit les premières infractions informatiques dans le Code pénal, base des articles 323-1 et suivants actuels.</div>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">🏛️ Organismes à connaître en France</div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">🛡️ ANSSI <span class="badge badge-green">CYBERDÉFENSE</span></div>
+        <p>Agence nationale de sécurité des systèmes d'information, référent technique de l'État en cybersécurité.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">⚖️ CNIL <span class="badge badge-blue">DONNÉES</span></div>
+        <p>Commission Nationale de l'Informatique et des Libertés : veille au respect du RGPD et reçoit les plaintes liées aux données personnelles.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🆘 Cybermalveillance.gouv.fr <span class="badge badge-amber">ASSISTANCE</span></div>
+        <p>Dispositif gouvernemental d'assistance aux victimes de cybermalveillance et de sensibilisation du grand public.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">🚔 OFAC / BL2C / C3N <span class="badge badge-red">POLICE</span></div>
+        <p>Unités spécialisées de la police et de la gendarmerie dédiées à la lutte contre la cybercriminalité.</p>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">🌍 Et à l'international ?</div>
+    <p>Les lois varient selon les pays mais convergent souvent sur les mêmes principes. La <strong>Convention de Budapest</strong> (2001) du Conseil de l'Europe est le premier traité international visant à harmoniser la lutte contre la cybercriminalité entre pays signataires. Aux États-Unis, le <strong>Computer Fraud and Abuse Act (CFAA)</strong> joue un rôle équivalent aux articles 323 du Code pénal français.</p>
+
+    <hr class="divider"/>
+    <div class="card" style="border-color:rgba(255,68,68,0.3);">
+      <div class="card-title">⚖️ À retenir <span class="badge badge-red">IMPORTANT</span></div>
+      <p>Même sans intention malveillante, accéder à un système sans autorisation est illégal. Tester la sécurité d'un système sans permission explicite = infraction. Les mineurs ne sont pas exemptés — des sanctions adaptées existent.</p>
+    </div>
+  </section>
+
+  <!-- =================== HISTORIQUE =================== -->
+  <section class="tab-panel" id="historique">
+    <div class="section-title">Historique des cyberattaques</div>
+    <div class="section-lead">les événements qui ont marqué l'histoire de la cybersécurité</div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">1988</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Le ver Morris</div>
+          <p>Considéré comme le premier ver informatique majeur d'Internet, il infecte environ 6 000 ordinateurs (une part importante du réseau de l'époque) et mène à la création des premiers CERT.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2000</div>
+        <div class="timeline-content">
+          <div class="timeline-title">ILOVEYOU</div>
+          <p>Ver informatique diffusé par email qui infecte des millions d'ordinateurs en quelques heures, causant des milliards de dollars de dégâts dans le monde.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2007</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Cyberattaques contre l'Estonie</div>
+          <p>Vague d'attaques DDoS massives paralysant banques, médias et ministères : souvent citée comme la première "cyberguerre" visant un État entier.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2010</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Stuxnet</div>
+          <p>Ver extrêmement sophistiqué ayant saboté des centrifugeuses nucléaires iraniennes, marquant l'entrée des cyberarmes d'État dans le monde physique.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2013-2014</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Target & Sony Pictures</div>
+          <p>Vol de données de 40 millions de cartes bancaires chez Target ; piratage destructeur de Sony Pictures avec fuite massive de données internes.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2016-2017</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Mirai Botnet</div>
+          <p>Botnet d'objets connectés mal sécurisés (caméras, routeurs) utilisé pour des DDoS records, faisant tomber de grands services internet.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Mai 2017</div>
+        <div class="timeline-content">
+          <div class="timeline-title">WannaCry</div>
+          <p>Ransomware mondial exploitant une faille Windows (EternalBlue), touchant plus de 200 000 ordinateurs dans 150 pays, dont des hôpitaux britanniques.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Juin 2017</div>
+        <div class="timeline-content">
+          <div class="timeline-title">NotPetya</div>
+          <p>Malware destructeur déguisé en ransomware, causant plus de 10 milliards de dollars de dégâts, notamment chez le transporteur Maersk.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2017</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Equifax</div>
+          <p>Fuite de données personnelles et financières de 147 millions d'Américains, l'une des plus grandes violations de données de l'histoire.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2020</div>
+        <div class="timeline-content">
+          <div class="timeline-title">SolarWinds</div>
+          <p>Attaque de la chaîne d'approvisionnement sophistiquée compromettant un logiciel utilisé par des milliers d'organisations, dont des agences gouvernementales américaines.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Mai 2021</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Colonial Pipeline</div>
+          <p>Ransomware paralysant un oléoduc majeur aux États-Unis, provoquant des pénuries de carburant et une rançon payée en Bitcoin.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2023-2024</div>
+        <div class="timeline-content">
+          <div class="timeline-title">MGM Resorts & multiplication des deepfakes</div>
+          <p>Piratage par ingénierie sociale du géant des casinos MGM (pertes estimées à plus de 100 millions de dollars), dans un contexte de montée des arnaques utilisant l'IA générative.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== GLOSSAIRE =================== -->
+  <section class="tab-panel" id="glossaire">
+    <div class="section-title">Glossaire</div>
+    <div class="section-lead">les termes essentiels de la cybersécurité expliqués simplement</div>
+
+    <input type="text" class="glossary-search" id="glossary-search" placeholder="🔍 Rechercher un terme..." oninput="filterGlossary()"/>
+
+    <div id="glossary-container"></div>
+    <div id="glossary-empty" style="display:none;color:var(--text-muted);font-family:'Share Tech Mono',monospace;font-size:13px;text-align:center;padding:30px 0;">Aucun terme trouvé.</div>
+  </section>
+
+  <!-- =================== OUTILS =================== -->
+  <section class="tab-panel" id="outils">
+    <div class="section-title">Outils & ressources</div>
+    <div class="section-lead">une sélection d'outils pour renforcer ta sécurité au quotidien</div>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">🔑 Gestionnaires de mots de passe</div>
+    <div class="grid2">
+      <div class="card"><div class="card-title">Bitwarden <span class="badge badge-green">GRATUIT/OPEN SOURCE</span></div><p>Gestionnaire open source fiable, synchronisation multi-appareils, version gratuite très complète.</p></div>
+      <div class="card"><div class="card-title">KeePass / KeePassXC <span class="badge badge-green">LOCAL</span></div><p>Stockage 100% local et chiffré, idéal pour qui veut garder un contrôle total sur ses données.</p></div>
+      <div class="card"><div class="card-title">1Password <span class="badge badge-blue">PAYANT</span></div><p>Solution premium très soignée, populaire en entreprise pour la gestion d'équipe.</p></div>
+    </div>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">🌐 VPN & navigation privée</div>
+    <div class="grid2">
+      <div class="card"><div class="card-title">VPN réputés <span class="badge badge-blue">CONFIDENTIALITÉ</span></div><p>Privilégie des fournisseurs avec politique "no-log" auditée indépendamment et un historique de transparence.</p></div>
+      <div class="card"><div class="card-title">Tor Browser <span class="badge badge-blue">ANONYMAT</span></div><p>Navigateur routant le trafic via plusieurs nœuds chiffrés pour renforcer l'anonymat en ligne.</p></div>
+      <div class="card"><div class="card-title">Navigateurs orientés vie privée <span class="badge badge-green">CONFIDENTIALITÉ</span></div><p>Certains navigateurs bloquent par défaut trackers et cookies tiers pour limiter le profilage publicitaire.</p></div>
+    </div>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">🦠 Antivirus & protection</div>
+    <div class="grid2">
+      <div class="card"><div class="card-title">Antivirus intégrés <span class="badge badge-green">GRATUIT</span></div><p>Windows Defender (Windows) ou XProtect (macOS) suffisent pour beaucoup d'usages, à condition d'être à jour.</p></div>
+      <div class="card"><div class="card-title">Solutions tierces <span class="badge badge-blue">COMPLET</span></div><p>Des suites de sécurité ajoutent pare-feu avancé, anti-phishing et protection des paiements en ligne.</p></div>
+      <div class="card"><div class="card-title">uBlock Origin <span class="badge badge-green">NAVIGATEUR</span></div><p>Extension de blocage de publicités et trackers reconnue pour son efficacité et sa légèreté.</p></div>
+    </div>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">🆘 Vérifier & signaler</div>
+    <div class="grid2">
+      <div class="card"><div class="card-title">Have I Been Pwned <span class="badge badge-amber">VÉRIFICATION</span></div><p>Permet de vérifier si ton adresse email a été exposée dans une fuite de données connue.</p></div>
+      <div class="card"><div class="card-title">Cybermalveillance.gouv.fr <span class="badge badge-green">FRANCE</span></div><p>Plateforme officielle pour signaler une cyberattaque et trouver un prestataire de confiance près de toi.</p></div>
+      <div class="card"><div class="card-title">Signal-arnaques.com / PHAROS <span class="badge badge-amber">SIGNALEMENT</span></div><p>Signale les sites frauduleux ou contenus illicites rencontrés en ligne aux autorités françaises.</p></div>
+    </div>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">🔐 Chiffrement & communication sécurisée</div>
+    <div class="grid2">
+      <div class="card"><div class="card-title">Messageries chiffrées <span class="badge badge-blue">PRIVÉ</span></div><p>Privilégie des messageries avec chiffrement de bout en bout par défaut pour tes échanges sensibles.</p></div>
+      <div class="card"><div class="card-title">Chiffrement de disque <span class="badge badge-blue">APPAREIL</span></div><p>BitLocker (Windows) ou FileVault (Mac) protègent tes fichiers même en cas de vol physique de l'appareil.</p></div>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:8px;">🧑‍💻 Outils professionnels (analyse réseau & pentest)</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">Ces outils sont utilisés par les professionnels de la sécurité, exclusivement sur des systèmes pour lesquels ils ont une <strong>autorisation explicite</strong>. Les utiliser sans permission est illégal (voir l'onglet Lois & peines).</p>
+    <div class="grid2">
+      <div class="card"><div class="card-title">Wireshark <span class="badge badge-blue">ANALYSE RÉSEAU</span></div><p>Analyseur de paquets réseau permettant d'observer en détail le trafic qui circule sur un réseau, très utilisé en diagnostic et formation.</p></div>
+      <div class="card"><div class="card-title">Nmap <span class="badge badge-blue">SCAN RÉSEAU</span></div><p>Outil de cartographie réseau qui identifie les appareils et services actifs sur un réseau, utilisé en audit de sécurité autorisé.</p></div>
+      <div class="card"><div class="card-title">Kali Linux <span class="badge badge-amber">DISTRIBUTION PENTEST</span></div><p>Distribution Linux regroupant des centaines d'outils de test d'intrusion, standard de référence pour les pentesters professionnels.</p></div>
+      <div class="card"><div class="card-title">Burp Suite <span class="badge badge-blue">SÉCURITÉ WEB</span></div><p>Plateforme d'audit de sécurité des applications web, utilisée pour identifier les failles comme l'injection SQL ou le XSS.</p></div>
+      <div class="card"><div class="card-title">Metasploit Framework <span class="badge badge-red">TEST D'INTRUSION</span></div><p>Framework utilisé par les professionnels pour valider l'exploitabilité réelle de failles déjà identifiées, dans un cadre légal strict.</p></div>
+      <div class="card"><div class="card-title">OWASP ZAP <span class="badge badge-green">OPEN SOURCE</span></div><p>Scanner de vulnérabilités web open source, accessible aux débutants pour apprendre les bases de l'audit de sécurité web.</p></div>
+    </div>
+  </section>
+
+  <!-- =================== ATELIER ===================  -->
+  <section class="tab-panel" id="atelier">
+    <div class="section-title">Atelier pratique</div>
+    <div class="section-lead">expérimente avec des outils interactifs — 100% local, rien n'est envoyé sur Internet</div>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:14px;">🎲 Générateur de mot de passe</div>
+    <div class="workshop-card">
+      <div class="pwgen-output" id="pwgen-output">CliqueSurGénérer123!</div>
+      <button class="copy-btn" id="pwgen-copy" onclick="copyGeneratedPassword()">📋 Copier</button>
+      <div class="pwgen-controls">
+        <div class="pwgen-row">
+          <label for="pwgen-length">Longueur : <span id="pwgen-length-val">16</span> caractères</label>
+          <input type="range" id="pwgen-length" min="8" max="32" value="16" oninput="document.getElementById('pwgen-length-val').textContent=this.value"/>
+        </div>
+        <div class="pwgen-checks">
+          <label><input type="checkbox" id="pwgen-upper" checked/> Majuscules (A-Z)</label>
+          <label><input type="checkbox" id="pwgen-numbers" checked/> Chiffres (0-9)</label>
+          <label><input type="checkbox" id="pwgen-symbols" checked/> Symboles (!@#$...)</label>
+        </div>
+      </div>
+      <button class="ai-send-btn" style="width:100%;margin-top:14px;" onclick="generatePassword()">🎲 Générer un nouveau mot de passe</button>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:14px;">📊 Vérificateur de force de mot de passe</div>
+    <div class="workshop-card">
+      <div class="pwcheck-input-wrapper">
+        <input type="password" id="pwcheck-input" class="pwcheck-input" placeholder="Tape un mot de passe pour tester sa force..." oninput="checkPasswordStrength()"/>
+        <button class="pwcheck-toggle" onclick="togglePwVisibility()" id="pwcheck-toggle">👁️</button>
+      </div>
+      <div class="pwcheck-bar"><div class="pwcheck-bar-fill" id="pwcheck-fill"></div></div>
+      <div class="pwcheck-label" id="pwcheck-label">En attente de saisie...</div>
+      <ul class="tip-list" id="pwcheck-feedback"></ul>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:14px;">🎣 Simulateur de phishing</div>
+    <div class="section-lead" style="margin-bottom:16px;">observe chaque message et décide : phishing ou légitime ?</div>
+    <div class="workshop-card">
+      <div class="quiz-score-bar" style="margin-bottom:18px;">Score : <span id="phish-score">0</span> / <span id="phish-total">0</span></div>
+      <div id="phish-container"></div>
+      <div id="phish-done" style="display:none;text-align:center;padding:20px 0;">
+        <div class="section-title" style="font-size:17px;">Simulation terminée !</div>
+        <p>Ton score final : <strong id="phish-final-score"></strong></p>
+        <button class="ai-send-btn" onclick="restartPhishingSim()">🔁 Recommencer</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== CARRIÈRES =================== -->
+  <section class="tab-panel" id="carrieres">
+    <div class="section-title">Carrières en cybersécurité</div>
+    <div class="section-lead">un secteur en pénurie de talents, avec des opportunités partout</div>
+
+    <div class="terminal">
+      <div class="output">[i] La cybersécurité manque de centaines de milliers de profils qualifiés dans le monde.</div>
+      <div class="output">[i] Secteur ouvert aux profils techniques comme non-techniques (droit, communication, management).</div>
+    </div>
+
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">💼 Quelques métiers</div>
+    <div class="grid2">
+      <div class="card"><div class="card-title">🔴 Pentester / Hacker éthique <span class="badge badge-red">OFFENSIF</span></div><p>Teste légalement la sécurité des systèmes (avec autorisation) pour trouver les failles avant les attaquants.</p></div>
+      <div class="card"><div class="card-title">🔵 Analyste SOC <span class="badge badge-blue">DÉFENSIF</span></div><p>Surveille en continu les alertes de sécurité et réagit aux incidents au sein d'un centre d'opérations.</p></div>
+      <div class="card"><div class="card-title">🟢 RSSI <span class="badge badge-green">MANAGEMENT</span></div><p>Responsable de la Sécurité des Systèmes d'Information : pilote la stratégie de sécurité d'une organisation.</p></div>
+      <div class="card"><div class="card-title">🟡 Analyste forensic <span class="badge badge-amber">INVESTIGATION</span></div><p>Enquête après un incident pour comprendre comment l'attaque s'est déroulée et en retrouver les preuves.</p></div>
+      <div class="card"><div class="card-title">🔵 Architecte sécurité <span class="badge badge-blue">CONCEPTION</span></div><p>Conçoit des infrastructures et systèmes sécurisés dès leur conception ("security by design").</p></div>
+      <div class="card"><div class="card-title">🟢 DPO (Délégué à la protection des données) <span class="badge badge-green">JURIDIQUE</span></div><p>Veille à la conformité RGPD d'une organisation, à la croisée du droit et de la technique.</p></div>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">🏆 Certifications reconnues</div>
+    <div class="grid2">
+      <div class="card"><div class="card-title">CompTIA Security+ <span class="badge badge-green">DÉBUTANT</span></div><p>Certification généraliste reconnue internationalement, bon point d'entrée dans le métier.</p></div>
+      <div class="card"><div class="card-title">CEH (Certified Ethical Hacker) <span class="badge badge-amber">INTERMÉDIAIRE</span></div><p>Certification axée sur les techniques offensives et le test d'intrusion.</p></div>
+      <div class="card"><div class="card-title">OSCP <span class="badge badge-red">AVANCÉ</span></div><p>Certification pratique très exigeante, très respectée dans le milieu du pentest.</p></div>
+      <div class="card"><div class="card-title">CISSP <span class="badge badge-blue">EXPERT/MANAGEMENT</span></div><p>Certification de référence pour les postes seniors et managériaux en sécurité de l'information.</p></div>
+    </div>
+
+    <hr class="divider"/>
+    <div class="card-title" style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;margin-bottom:16px;">🛣️ Comment se lancer</div>
+    <ul class="tip-list">
+      <li><span class="tip-icon">[+]</span><div>Forme-toi avec des bases solides en <strong>réseaux et systèmes</strong> avant de te spécialiser en sécurité.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Pratique sur des plateformes légales de <strong>CTF (Capture The Flag)</strong> et de labs dédiés.</div></li>
+      <li><span class="tip-icon">[+]</span><div>Rejoins des communautés (forums, conférences comme la <strong>Nuit du Hack</strong> ou le <strong>FIC</strong> en France).</div></li>
+      <li><span class="tip-icon">[!]</span><div>Ne pratique jamais d'intrusion sur des systèmes réels sans autorisation écrite, même "pour apprendre".</div></li>
+    </ul>
+  </section>
+
+  <!-- =================== QUIZ =================== -->
+  <section class="tab-panel" id="quiz">
+    <div class="section-title">Quiz – Teste tes connaissances</div>
+    <div class="section-lead">20 questions pour évaluer ton niveau</div>
+
+    <div class="quiz-score-bar">Score : <span id="score-display">0</span> / <span id="total-display">20</span> bonnes réponses
+    </div>
+
+    <div id="quiz-container"></div>
+  </section>
+
+  <!-- =================== IA ASSISTANT =================== -->
+  <section class="tab-panel" id="ai">
+    <div class="section-title">IA Assistant</div>
+    <div class="section-lead">pose tes questions sur la cybersécurité & cybercriminalité</div>
+
+    <div class="ai-suggestions" id="ai-suggestions">
+      <button class="ai-suggestion-btn" onclick="askSuggestion('C\'est quoi le phishing ?')">🎣 C'est quoi le phishing ?</button>
+      <button class="ai-suggestion-btn" onclick="askSuggestion('Comment créer un bon mot de passe ?')">🔑 Bon mot de passe ?</button>
+      <button class="ai-suggestion-btn" onclick="askSuggestion('Qu\'est-ce qu\'un ransomware ?')">🔒 Ransomware ?</button>
+      <button class="ai-suggestion-btn" onclick="askSuggestion('Quelles sont les lois françaises sur le hacking ?')">⚖️ Lois françaises ?</button>
+      <button class="ai-suggestion-btn" onclick="askSuggestion('Comment me protéger des cyberattaques ?')">🛡️ Me protéger ?</button>
+      <button class="ai-suggestion-btn" onclick="askSuggestion('C\'est quoi le Dark Web ?')">🌑 Dark Web ?</button>
+      <button class="ai-suggestion-btn" onclick="askSuggestion('Quelles études pour travailler en cybersécurité ?')">🎓 Quelles études ?</button>
+      <button class="ai-suggestion-btn" onclick="askSuggestion('C\'est quoi le Zero Trust ?')">🧠 Zero Trust ?</button>
+    </div>
+
+    <div class="ai-chat-wrapper">
+      <div class="ai-chat-messages" id="ai-messages">
+        <div class="ai-msg bot">
+          <div class="ai-msg-avatar">AI</div>
+          <div class="ai-msg-bubble">
+            Bonjour ! Je suis l'assistant IA du guide de Sohail. 🛡️<br><br>
+            Pose-moi toutes tes questions sur la <strong>cybersécurité</strong> et la <strong>cybercriminalité</strong> : attaques, protection, lois, concepts techniques... Je suis là pour t'aider.
+          </div>
+        </div>
+      </div>
+      <div class="ai-chat-footer">
+        <textarea class="ai-chat-input" id="ai-input" rows="1" placeholder="> Pose ta question ici..." onkeydown="handleKey(event)"></textarea>
+        <button class="ai-send-btn" id="ai-send-btn" onclick="sendMessage()">ENVOYER</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>©</span> 2026 – Le guide de Sohail | Cybersécurité &amp; Cybercriminalité <span>[ S21 ]</span>
+</footer>
+
+<style>
+  @keyframes blink { 50% { opacity: 0; } }
+</style>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // =================== MATRIX RAIN EFFECT ===================
+  (function initMatrixRain() {
+    const canvas = document.getElementById('matrix-rain');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const header = canvas.parentElement;
+    let columns, drops;
+    const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ$#&%';
+
+    function resize() {
+      canvas.width = header.offsetWidth;
+      canvas.height = header.offsetHeight;
+      columns = Math.floor(canvas.width / 16);
+      drops = new Array(columns).fill(0).map(() => Math.random() * -50);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function draw() {
+      ctx.fillStyle = 'rgba(6,10,6,0.18)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00ff41';
+      ctx.font = '14px "Share Tech Mono", monospace';
+      for (let i = 0; i < columns; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * 16, drops[i] * 16);
+        if (drops[i] * 16 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 60);
+  })();
+
+  // =================== TYPES D'ATTAQUES (détaillé) ===================
+  const attacksData = [
+    { icon:'🎣', name:'Phishing', badge:'TRÈS FRÉQUENT', badgeClass:'badge-red', sev:'danger',
+      summary:`Faux emails ou SMS imitant des services officiels (banque, impôts, streaming...) pour voler identifiants ou informations bancaires. Représente environ 90% des cyberattaques réussies.`,
+      mechanism:`L'attaquant envoie un message imitant une marque connue, avec un lien vers un faux site copiant l'original pour récupérer les identifiants saisis.`,
+      signs:`Adresse d'expéditeur bizarre, fautes d'orthographe, sentiment d'urgence ("compte bloqué"), lien qui ne correspond pas au vrai domaine.`,
+      protection:`Ne clique jamais sur un lien reçu par surprise : tape l'adresse toi-même ou utilise l'application officielle. Vérifie le domaine avant de saisir un mot de passe.` },
+    { icon:'🐳', name:'Whaling (phishing ciblé dirigeants)', badge:'CIBLÉ', badgeClass:'badge-red', sev:'danger',
+      summary:`Variante du phishing visant spécifiquement des cadres ou dirigeants, avec des messages très personnalisés et crédibles.`,
+      mechanism:`L'attaquant étudie sa cible (réseaux sociaux, site de l'entreprise) pour rédiger un message hyper-crédible, souvent lié à un sujet financier ou juridique.`,
+      signs:`Demande inhabituelle et urgente venant "d'un partenaire" ou "d'un avocat", ton très formel et personnalisé, pression sur la confidentialité.`,
+      protection:`Vérifie toute demande sensible par un second canal (appel direct) avant d'agir, même si l'email semble venir d'une personne connue.` },
+    { icon:'🔒', name:'Ransomware (rançongiciel)', badge:'DESTRUCTEUR', badgeClass:'badge-red', sev:'danger',
+      summary:`Logiciel qui chiffre tous les fichiers d'un système et exige une rançon pour les déchiffrer. Cible souvent les hôpitaux et entreprises. Exemples connus : WannaCry, LockBit.`,
+      mechanism:`Une fois exécuté (souvent via une pièce jointe ou une faille), le malware chiffre les fichiers puis affiche une demande de rançon, généralement en crypto-monnaie.`,
+      signs:`Fichiers soudainement renommés ou illisibles, message de rançon à l'écran, lenteur inhabituelle juste avant l'incident.`,
+      protection:`Sauvegardes régulières hors ligne, mises à jour systématiques, et ne jamais ouvrir une pièce jointe inattendue.` },
+    { icon:'🦠', name:'Malware / Virus', badge:'COMMUN', badgeClass:'badge-amber', sev:'warn',
+      summary:`Logiciels malveillants conçus pour endommager, espionner ou prendre le contrôle d'un système. Inclut les trojans, spywares, adwares, rootkits.`,
+      mechanism:`Se propage via des fichiers infectés, des téléchargements douteux ou des clés USB, puis s'exécute pour endommager ou espionner le système.`,
+      signs:`Lenteurs inexpliquées, programmes qui s'ouvrent seuls, ventilateur qui tourne sans raison, pop-ups publicitaires inhabituels.`,
+      protection:`Antivirus à jour, téléchargements uniquement depuis des sources officielles, scan régulier du système.` },
+    { icon:'🌊', name:'Attaque DDoS', badge:'PERTURBATEUR', badgeClass:'badge-amber', sev:'warn',
+      summary:`Inondation d'un serveur avec des millions de requêtes simultanées pour le rendre inaccessible. Utilisé pour paralyser des sites web ou services en ligne.`,
+      mechanism:`Un réseau d'appareils infectés (botnet) envoie simultanément un volume massif de requêtes vers une cible, saturant ses capacités.`,
+      signs:`Site ou service soudainement très lent ou totalement inaccessible, pic anormal de trafic réseau.`,
+      protection:`Pour les entreprises : services anti-DDoS et répartition de charge. Pour un particulier, il n'y a rien à faire de spécifique, ce n'est pas une menace individuelle directe.` },
+    { icon:'👤', name:"Usurpation d'identité", badge:'PERSONNEL', badgeClass:'badge-amber', sev:'warn',
+      summary:`Utilisation des données personnelles d'une victime pour créer de faux comptes, contracter des crédits frauduleux ou commettre des escroqueries en son nom.`,
+      mechanism:`L'attaquant collecte des informations personnelles (fuites de données, réseaux sociaux) pour se faire passer pour la victime auprès de tiers.`,
+      signs:`Factures ou courriers inconnus, alertes de connexion inhabituelles, refus de crédit inexpliqué.`,
+      protection:`Limite les informations personnelles partagées publiquement et surveille régulièrement tes relevés bancaires et ton dossier de crédit.` },
+    { icon:'🔑', name:'Brute Force / Credential Stuffing', badge:'AUTOMATISÉ', badgeClass:'badge-blue', sev:'info',
+      summary:`Essai automatique de milliers de combinaisons de mots de passe pour forcer l'accès à un compte. Le credential stuffing réutilise des mots de passe volés lors d'autres fuites.`,
+      mechanism:`Un script teste automatiquement de nombreuses combinaisons de mots de passe, ou réutilise des identifiants déjà volés sur d'autres services.`,
+      signs:`Alerte de connexion depuis un lieu inhabituel, compte verrouillé après plusieurs tentatives échouées.`,
+      protection:`Mot de passe unique et long par site, plus une double authentification qui bloque la quasi-totalité de ces tentatives.` },
+    { icon:'🕵️', name:'Man-in-the-Middle (MITM)', badge:'DISCRET', badgeClass:'badge-blue', sev:'info',
+      summary:`L'attaquant s'intercale dans la communication entre deux parties pour écouter ou modifier les données échangées, souvent sur des réseaux Wi-Fi publics non sécurisés.`,
+      mechanism:`L'attaquant se positionne entre la victime et le service visé (souvent via un faux point d'accès Wi-Fi) pour intercepter le trafic.`,
+      signs:`Certificat de sécurité inhabituel, avertissement du navigateur sur la connexion, réseau Wi-Fi public sans mot de passe.`,
+      protection:`Évite les Wi-Fi publics pour des actions sensibles, ou utilise un VPN ; vérifie toujours le cadenas HTTPS.` },
+    { icon:'💉', name:'Injection SQL', badge:'TECHNIQUE', badgeClass:'badge-blue', sev:'info',
+      summary:`Insertion de commandes SQL malveillantes dans les champs d'un site web pour accéder, modifier ou supprimer des données dans la base de données du serveur.`,
+      mechanism:`L'attaquant profite d'un champ de saisie mal sécurisé pour injecter des commandes qui manipulent directement la base de données.`,
+      signs:`Concerne surtout les développeurs/sites web ; pour un utilisateur, aucun signe visible direct.`,
+      protection:`Côté développeur : valider et filtrer toutes les entrées utilisateur, utiliser des requêtes préparées.` },
+    { icon:'🎭', name:'Ingénierie sociale (Social Engineering)', badge:'PSYCHOLOGIQUE', badgeClass:'badge-red', sev:'danger',
+      summary:`Manipulation psychologique pour pousser une victime à divulguer des informations ou à effectuer une action. Base de la plupart des attaques : phishing, faux support technique, prétextage.`,
+      mechanism:`L'attaquant joue sur la confiance, l'urgence, la peur ou l'autorité pour manipuler sa cible plutôt que d'attaquer un système technique.`,
+      signs:`Pression pour agir vite, demande inhabituelle d'informations confidentielles, interlocuteur qui évite les vérifications.`,
+      protection:`Prends toujours le temps de vérifier l'identité de ton interlocuteur par un canal indépendant avant d'agir.` },
+    { icon:'🎯', name:'Prétextage & Baiting', badge:'AVANCÉ', badgeClass:'badge-amber', sev:'warn',
+      summary:`Techniques d'ingénierie sociale où l'attaquant invente un scénario crédible (prétextage) ou laisse un appât physique comme une clé USB piégée (baiting).`,
+      mechanism:`Le prétextage construit un faux contexte ("je suis du support technique") ; le baiting compte sur la curiosité (ex: clé USB abandonnée volontairement).`,
+      signs:`Scénario qui semble "trop pratique", objet inconnu trouvé (clé USB, QR code) incitant à une action immédiate.`,
+      protection:`Ne branche jamais un support inconnu sur ton appareil et vérifie toujours l'identité réelle de la personne au téléphone.` },
+    { icon:'📱', name:'Smishing & Vishing', badge:'FRÉQUENT', badgeClass:'badge-amber', sev:'warn',
+      summary:`Variantes du phishing par SMS (smishing, ex: faux colis à payer) ou par appel téléphonique (vishing, ex: faux conseiller bancaire).`,
+      mechanism:`Le message ou l'appel imite un organisme connu (livreur, banque, impôts) pour pousser à cliquer un lien ou donner des informations par téléphone.`,
+      signs:`Numéro inconnu ou masqué, demande de paiement par lien SMS, conseiller "bancaire" qui demande ton code de carte.`,
+      protection:`Une banque ne te demandera jamais ton code secret ou ton mot de passe par téléphone ou SMS. Raccroche et rappelle le numéro officiel.` },
+    { icon:'⌨️', name:'Spyware & Keylogger', badge:'DISCRET', badgeClass:'badge-blue', sev:'info',
+      summary:`Logiciels espions qui enregistrent l'activité (frappes au clavier, captures d'écran, navigation) sans que la victime le sache.`,
+      mechanism:`Installé discrètement via un autre logiciel infecté, il transmet en arrière-plan les données collectées à l'attaquant.`,
+      signs:`Ralentissements inexpliqués, activité réseau inhabituelle, batterie qui se vide anormalement vite sur mobile.`,
+      protection:`Antivirus avec module anti-spyware, vérification régulière des applications installées et de leurs permissions.` },
+    { icon:'⛏️', name:'Cryptojacking', badge:'DISCRET', badgeClass:'badge-amber', sev:'warn',
+      summary:`Utilisation détournée de la puissance de calcul d'un appareil infecté pour miner des crypto-monnaies à l'insu de la victime.`,
+      mechanism:`Un script malveillant (souvent injecté dans une page web ou une app) utilise le processeur de l'appareil pour générer des crypto-monnaies pour l'attaquant.`,
+      signs:`Appareil anormalement lent ou chaud, ventilateur très bruyant, batterie qui se décharge rapidement sans usage intensif.`,
+      protection:`Bloqueur de scripts/publicités, surveillance de l'utilisation processeur, mise à jour du navigateur et des extensions.` },
+    { icon:'🔍', name:'Attaque Zero-Day', badge:'CRITIQUE', badgeClass:'badge-red', sev:'danger',
+      summary:`Exploitation d'une faille de sécurité inconnue de l'éditeur, donc sans correctif disponible. Extrêmement dangereuse et recherchée par les attaquants avancés.`,
+      mechanism:`L'attaquant découvre (ou achète) une vulnérabilité non publique et l'exploite avant que l'éditeur ne puisse la corriger.`,
+      signs:`Très difficile à détecter par nature ; souvent révélée après coup par les chercheurs en sécurité ou l'éditeur concerné.`,
+      protection:`Mises à jour appliquées dès leur sortie, et utilisation d'outils de détection comportementale qui repèrent les activités anormales.` },
+    { icon:'🔗', name:"Attaque de la chaîne d'approvisionnement (Supply Chain)", badge:'INDIRECT', badgeClass:'badge-amber', sev:'warn',
+      summary:`Compromission d'un fournisseur ou d'une bibliothèque logicielle pour atteindre indirectement ses clients (ex : SolarWinds, dépendances piégées).`,
+      mechanism:`L'attaquant infecte un composant largement utilisé (logiciel, mise à jour, dépendance) plutôt que d'attaquer directement chaque victime.`,
+      signs:`Très difficile à détecter côté utilisateur final ; repose sur la vigilance des éditeurs et des équipes de sécurité.`,
+      protection:`Pour les entreprises : audit des dépendances logicielles et des fournisseurs ; pour tous : garder ses logiciels à jour.` },
+    { icon:'🕳️', name:'Watering Hole', badge:'CIBLÉ', badgeClass:'badge-blue', sev:'info',
+      summary:`Infection d'un site légitime fréquenté par les cibles visées, pour piéger leurs visiteurs sans attaque directe.`,
+      mechanism:`L'attaquant compromet un site web que sa cible visite régulièrement, puis y dépose un code malveillant qui infecte les visiteurs.`,
+      signs:`Comportement anormal après la visite d'un site habituel (ralentissements, pop-ups inhabituels).`,
+      protection:`Navigateur et antivirus à jour, extensions de sécurité qui bloquent les scripts malveillants connus.` },
+    { icon:'💼', name:'Business Email Compromise (BEC)', badge:'CIBLÉ ENTREPRISE', badgeClass:'badge-amber', sev:'warn',
+      summary:`Compromission ou usurpation d'un email professionnel pour détourner des fonds ou des informations sensibles. Coûte des milliards aux entreprises chaque année.`,
+      mechanism:`L'attaquant compromet ou imite la boîte mail d'un dirigeant/fournisseur pour demander un virement ou des informations confidentielles.`,
+      signs:`Changement soudain de coordonnées bancaires, urgence inhabituelle, ton légèrement différent de d'habitude.`,
+      protection:`Toujours valider un changement de RIB ou un virement important par un appel téléphonique au numéro connu, pas celui fourni dans l'email.` },
+    { icon:'🤖', name:'Deepfake & IA malveillante', badge:'ÉMERGENT', badgeClass:'badge-red', sev:'danger',
+      summary:`Contenus audio/vidéo truqués par IA, utilisés pour l'usurpation d'identité, la désinformation ou des arnaques (ex : fausse voix d'un dirigeant au téléphone).`,
+      mechanism:`Une IA générative reproduit la voix ou l'image d'une personne réelle à partir d'échantillons existants, pour tromper l'interlocuteur.`,
+      signs:`Voix légèrement métallique ou décalage audio/vidéo, demande inhabituelle et urgente, refus de répondre en visio en direct.`,
+      protection:`En cas de doute sur un appel "urgent", rappelle la personne sur son numéro habituel pour vérifier.` },
+    { icon:'📡', name:'Botnet & attaques IoT', badge:'MASSIF', badgeClass:'badge-amber', sev:'warn',
+      summary:`Réseau d'appareils infectés (souvent des objets connectés) contrôlés à distance pour lancer des attaques DDoS massives, comme le botnet Mirai.`,
+      mechanism:`Des objets connectés mal sécurisés (caméras, routeurs) sont infectés en masse et utilisés à l'insu de leurs propriétaires.`,
+      signs:`Appareil connecté qui chauffe ou consomme plus de bande passante que d'habitude.`,
+      protection:`Change les mots de passe par défaut de tes objets connectés et maintiens leur firmware à jour.` },
+    { icon:'🌐', name:'Cross-Site Scripting (XSS)', badge:'TECHNIQUE', badgeClass:'badge-blue', sev:'info',
+      summary:`Injection de scripts malveillants dans une page web vue par d'autres utilisateurs, permettant de voler des sessions ou des données.`,
+      mechanism:`L'attaquant injecte du code dans un champ mal sécurisé d'un site, qui s'exécute ensuite dans le navigateur des autres visiteurs.`,
+      signs:`Concerne surtout les développeurs ; pour un visiteur, comportement inhabituel d'une page (pop-ups, redirections).`,
+      protection:`Côté développeur : échapper et filtrer toutes les données affichées provenant des utilisateurs.` },
+    { icon:'🔡', name:'Typosquatting', badge:'TROMPEUR', badgeClass:'badge-blue', sev:'info',
+      summary:`Enregistrement de noms de domaine très proches d'un site connu (faute de frappe) pour piéger les internautes distraits.`,
+      mechanism:`L'attaquant achète un domaine ressemblant à une marque connue (lettre manquante, extension différente) et y place un faux site ou des publicités.`,
+      signs:`URL légèrement différente de l'originale, design qui semble "presque" identique au site officiel.`,
+      protection:`Vérifie soigneusement l'URL avant de saisir des informations, utilise tes favoris pour les sites sensibles plutôt que de retaper l'adresse.` },
+    { icon:'💳', name:'Skimming (piégeage de carte bancaire)', badge:'PHYSIQUE', badgeClass:'badge-amber', sev:'warn',
+      summary:`Dispositif frauduleux installé sur un distributeur ou un terminal de paiement pour copier les données d'une carte bancaire.`,
+      mechanism:`Un petit lecteur est discrètement fixé sur la fente de carte d'un distributeur, parfois accompagné d'une mini-caméra pour capter le code secret.`,
+      signs:`Fente de carte qui semble ajoutée ou mal fixée, clavier qui résiste anormalement, distributeur isolé et peu surveillé.`,
+      protection:`Privilégie les distributeurs à l'intérieur des banques, cache ton code avec ta main, et surveille tes relevés bancaires régulièrement.` }
+  ];
+
+  function toggleAttack(idx) {
+    const el = document.getElementById('atk-' + idx);
+    if (el) el.classList.toggle('open');
+  }
+
+  function buildAttacks() {
+    const container = document.getElementById('attacks-container');
+    if (!container) return;
+    container.innerHTML = attacksData.map((a, i) => `
+      <div class="attack-item ${a.sev === 'warn' ? 'warn' : a.sev === 'info' ? 'info' : ''}" id="atk-${i}">
+        <div class="attack-header" onclick="toggleAttack(${i})">
+          <div class="attack-name">${a.icon} ${a.name} <span class="badge ${a.badgeClass}" style="margin-left:8px;">${a.badge}</span></div>
+          <span class="attack-arrow">▾</span>
+        </div>
+        <p class="attack-summary">${a.summary}</p>
+        <div class="attack-detail">
+          <div class="attack-detail-row"><strong>⚙️ Comment ça marche :</strong> ${a.mechanism}</div>
+          <div class="attack-detail-row"><strong>🚩 Signes d'alerte :</strong> ${a.signs}</div>
+          <div class="attack-detail-row"><strong>🛡️ Protection :</strong> ${a.protection}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  const glossaryData = [
+    { term: "Malware", def: "Terme générique pour tout logiciel malveillant (virus, ver, trojan, spyware, ransomware...)." },
+    { term: "Phishing (hameçonnage)", def: "Technique d'arnaque imitant un service de confiance pour voler des informations sensibles." },
+    { term: "Ransomware (rançongiciel)", def: "Malware qui chiffre les fichiers d'une victime et exige une rançon pour les déchiffrer." },
+    { term: "Trojan (cheval de Troie)", def: "Programme qui se fait passer pour un logiciel légitime afin d'exécuter des actions malveillantes en arrière-plan." },
+    { term: "Ver (worm)", def: "Programme malveillant capable de se propager seul d'un système à l'autre, sans action humaine." },
+    { term: "Spyware (logiciel espion)", def: "Logiciel qui collecte des informations sur l'utilisateur sans son consentement." },
+    { term: "Keylogger", def: "Logiciel ou dispositif enregistrant les frappes au clavier d'une victime." },
+    { term: "Botnet", def: "Réseau d'appareils infectés contrôlés à distance par un attaquant, souvent utilisé pour des DDoS." },
+    { term: "DDoS", def: "Attaque par déni de service distribué visant à saturer un service pour le rendre inaccessible." },
+    { term: "Firewall (pare-feu)", def: "Système filtrant le trafic réseau entrant et sortant selon des règles de sécurité définies." },
+    { term: "VPN", def: "Réseau privé virtuel qui chiffre la connexion et masque l'adresse IP de l'utilisateur." },
+    { term: "Chiffrement (encryption)", def: "Transformation de données en un format illisible sans la clé de déchiffrement appropriée." },
+    { term: "Hachage (hash)", def: "Fonction transformant une donnée en empreinte unique, utilisée notamment pour stocker les mots de passe." },
+    { term: "2FA / MFA", def: "Authentification à deux ou plusieurs facteurs, ajoutant une vérification en plus du mot de passe." },
+    { term: "Zero Trust", def: "Modèle de sécurité où aucun utilisateur ou appareil n'est automatiquement considéré comme fiable." },
+    { term: "Zero-Day", def: "Faille de sécurité inconnue de l'éditeur, exploitée avant qu'un correctif n'existe." },
+    { term: "Patch (correctif)", def: "Mise à jour logicielle corrigeant une vulnérabilité ou un bug." },
+    { term: "Exploit", def: "Code ou technique exploitant une vulnérabilité spécifique d'un système." },
+    { term: "Vulnérabilité (CVE)", def: "Faille de sécurité identifiée dans un logiciel ou système, souvent référencée par un identifiant CVE." },
+    { term: "Ingénierie sociale", def: "Manipulation psychologique visant à obtenir des informations ou actions d'une victime." },
+    { term: "Spoofing", def: "Usurpation d'une identité numérique (adresse email, IP, numéro de téléphone) pour tromper une cible." },
+    { term: "Man-in-the-Middle (MITM)", def: "Interception des communications entre deux parties par un attaquant positionné entre elles." },
+    { term: "Injection SQL", def: "Insertion de commandes SQL malveillantes dans un champ de saisie pour manipuler une base de données." },
+    { term: "XSS (Cross-Site Scripting)", def: "Injection de scripts malveillants dans une page web consultée par d'autres utilisateurs." },
+    { term: "Brute force", def: "Méthode testant automatiquement de nombreuses combinaisons pour deviner un mot de passe." },
+    { term: "Credential stuffing", def: "Réutilisation d'identifiants volés lors d'une fuite pour accéder à d'autres comptes." },
+    { term: "Dark Web", def: "Partie d'Internet non indexée, accessible via des outils spécifiques comme Tor, souvent associée à des activités illégales." },
+    { term: "Deep Web", def: "Ensemble du contenu web non indexé par les moteurs de recherche classiques (boîtes mail, intranets...), sans connotation illégale." },
+    { term: "Cryptojacking", def: "Utilisation détournée de la puissance de calcul d'un appareil pour miner des crypto-monnaies." },
+    { term: "Deepfake", def: "Contenu audio ou vidéo truqué par intelligence artificielle pour imiter une personne réelle." },
+    { term: "RGPD", def: "Règlement Général sur la Protection des Données, encadrant le traitement des données personnelles en Europe." },
+    { term: "SOC", def: "Security Operations Center : équipe surveillant en continu la sécurité d'une organisation." },
+    { term: "SIEM", def: "Outil centralisant et corrélant les événements de sécurité pour faciliter leur détection." },
+    { term: "Pentest", def: "Test d'intrusion légal et autorisé visant à identifier les failles de sécurité d'un système." },
+    { term: "CERT/CSIRT", def: "Équipe spécialisée dans la réponse aux incidents de sécurité informatique." },
+    { term: "Sandbox", def: "Environnement isolé permettant d'exécuter un programme suspect sans risque pour le système réel." },
+    { term: "Backdoor (porte dérobée)", def: "Accès caché à un système, installé par un attaquant ou parfois par un développeur, contournant les contrôles normaux." },
+    { term: "Rootkit", def: "Ensemble d'outils malveillants permettant de cacher la présence d'un attaquant et de garder un accès privilégié durable." },
+    { term: "Honeypot (pot de miel)", def: "Système leurre conçu pour attirer les attaquants et étudier leurs méthodes." },
+    { term: "Supply chain attack", def: "Attaque visant un fournisseur ou composant logiciel pour atteindre indirectement ses clients." },
+    { term: "OSINT", def: "Renseignement d'origine source ouverte : collecte d'informations à partir de sources publiques." },
+    { term: "Adware", def: "Logiciel affichant des publicités intrusives, parfois utilisé comme vecteur d'infection." },
+    { term: "Patch Tuesday", def: "Jour mensuel où certains éditeurs (comme Microsoft) publient leurs correctifs de sécurité." }
+  ];
+
+  function buildGlossary(list) {
+    const container = document.getElementById('glossary-container');
+    const empty = document.getElementById('glossary-empty');
+    container.innerHTML = '';
+    if (list.length === 0) {
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    list.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'glossary-item';
+      div.innerHTML = `<div class="glossary-term">${item.term}</div><div class="glossary-def">${item.def}</div>`;
+      container.appendChild(div);
+    });
+  }
+
+  function filterGlossary() {
+    const q = document.getElementById('glossary-search').value.toLowerCase().trim();
+    const filtered = glossaryData.filter(item =>
+      item.term.toLowerCase().includes(q) || item.def.toLowerCase().includes(q)
+    );
+    buildGlossary(filtered);
+  }
+
+  // =================== GÉNÉRATEUR DE MOT DE PASSE ===================
+  function generatePassword() {
+    const length = parseInt(document.getElementById('pwgen-length').value, 10);
+    const useUpper = document.getElementById('pwgen-upper').checked;
+    const useNumbers = document.getElementById('pwgen-numbers').checked;
+    const useSymbols = document.getElementById('pwgen-symbols').checked;
+    const lower = 'abcdefghijkmnpqrstuvwxyz';
+    const upper = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+    const numbers = '23456789';
+    const symbols = '!@#$%^&*-_=+?';
+    let chars = lower;
+    if (useUpper) chars += upper;
+    if (useNumbers) chars += numbers;
+    if (useSymbols) chars += symbols;
+
+    const arr = new Uint32Array(length);
+    if (window.crypto && window.crypto.getRandomValues) {
+      window.crypto.getRandomValues(arr);
+    } else {
+      for (let i = 0; i < length; i++) arr[i] = Math.floor(Math.random() * 4294967295);
+    }
+    let result = '';
+    for (let i = 0; i < length; i++) result += chars[arr[i] % chars.length];
+
+    const out = document.getElementById('pwgen-output');
+    out.textContent = result;
+    out.style.animation = 'none';
+    requestAnimationFrame(() => { out.style.animation = 'fadeInUp 0.3s ease'; });
+  }
+
+  function copyGeneratedPassword() {
+    const text = document.getElementById('pwgen-output').textContent;
+    const btn = document.getElementById('pwgen-copy');
+    const reset = () => { btn.textContent = '📋 Copier'; btn.classList.remove('copied'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '✓ Copié !';
+        btn.classList.add('copied');
+        setTimeout(reset, 1500);
+      }).catch(() => { btn.textContent = '⚠️ Échec'; setTimeout(reset, 1500); });
+    } else {
+      btn.textContent = '⚠️ Non supporté';
+      setTimeout(reset, 1500);
+    }
+  }
+
+  // =================== VÉRIFICATEUR DE FORCE ===================
+  function togglePwVisibility() {
+    const input = document.getElementById('pwcheck-input');
+    const btn = document.getElementById('pwcheck-toggle');
+    if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+    else { input.type = 'password'; btn.textContent = '👁️'; }
+  }
+
+  function checkPasswordStrength() {
+    const val = document.getElementById('pwcheck-input').value;
+    const fill = document.getElementById('pwcheck-fill');
+    const label = document.getElementById('pwcheck-label');
+    const feedback = document.getElementById('pwcheck-feedback');
+    feedback.innerHTML = '';
+
+    if (!val) {
+      fill.style.width = '0%';
+      fill.style.background = 'var(--red)';
+      label.textContent = 'En attente de saisie...';
+      return;
+    }
+
+    let score = 0;
+    if (val.length >= 8) score++;
+    if (val.length >= 16) score++;
+    if (/[a-z]/.test(val)) score++;
+    if (/[A-Z]/.test(val)) score++;
+    if (/[0-9]/.test(val)) score++;
+    if (/[^a-zA-Z0-9]/.test(val)) score++;
+    if (!/^(.)\1+$/.test(val)) score++;
+
+    const commonPatterns = ['password','motdepasse','123456','azerty','qwerty','soleil','iloveyou','admin'];
+    const lower = val.toLowerCase();
+    const isCommon = commonPatterns.some(w => lower.includes(w));
+    if (isCommon) score = Math.max(0, score - 3);
+
+    const pct = Math.min(100, Math.round((score / 7) * 100));
+    fill.style.width = pct + '%';
+
+    let labelText, color;
+    if (isCommon) { labelText = 'Très faible — motif trop courant'; color = 'var(--red)'; }
+    else if (pct < 35) { labelText = 'Faible'; color = 'var(--red)'; }
+    else if (pct < 60) { labelText = 'Moyen'; color = 'var(--amber)'; }
+    else if (pct < 85) { labelText = 'Fort'; color = 'var(--green2)'; }
+    else { labelText = 'Très fort'; color = 'var(--green)'; }
+    fill.style.background = color;
+    label.textContent = labelText;
+
+    const tips = [];
+    if (val.length < 16) tips.push('Allonge ton mot de passe à 16+ caractères pour plus de robustesse.');
+    if (!/[A-Z]/.test(val)) tips.push('Ajoute des majuscules.');
+    if (!/[0-9]/.test(val)) tips.push('Ajoute des chiffres.');
+    if (!/[^a-zA-Z0-9]/.test(val)) tips.push('Ajoute des symboles (!@#$...).');
+    if (isCommon) tips.push('Évite les mots ou suites trop courantes et devinables.');
+    feedback.innerHTML = tips.map(t => `<li><span class="tip-icon">[!]</span><div>${t}</div></li>`).join('');
+  }
+
+  // =================== SIMULATEUR DE PHISHING ===================
+  const phishingData = [
+    { sender: 'support@mabanque-secure-verification.com', subject: 'Votre compte sera suspendu dans 24h',
+      body: `Cher client,<br><br>Nous avons détecté une activité inhabituelle sur votre compte. <a class="fakelink">Cliquez ici pour vérifier votre identité</a> sous 24h, sous peine de blocage définitif de votre compte.`,
+      isPhishing: true, explain: `Le domaine de l'expéditeur n'est pas celui de la vraie banque, et le message crée une fausse urgence avec menace de blocage : deux signaux classiques de phishing.` },
+    { sender: 'notifications@maboite-rh.fr', subject: 'Votre bulletin de paie de juin est disponible',
+      body: `Bonjour,<br><br>Votre bulletin de paie du mois de juin est disponible. Vous pouvez le consulter en vous connectant à votre espace personnel habituel, comme chaque mois.`,
+      isPhishing: false, explain: `Aucun lien à cliquer, aucune urgence, et l'email renvoie vers l'espace habituel plutôt que de demander une action immédiate : c'est un message légitime classique.` },
+    { sender: 'colisexpress-livraison@track-colis-fr.net', subject: 'Colis en attente : 2,99€ de frais de douane à régler',
+      body: `Bonjour,<br><br>Votre colis ne pourra pas être livré sans le règlement de 2,99€ de frais de douane. <a class="fakelink">Réglez immédiatement</a> pour éviter le retour à l'expéditeur.`,
+      isPhishing: true, explain: `Petit montant demandé pour paraître anodin, domaine peu crédible, et pression via un faux risque de "retour à l'expéditeur" : un classique du smishing/phishing colis.` },
+    { sender: 'newsletter@cinepass-officiel.fr', subject: 'Vos sorties ciné du mois sont arrivées !',
+      body: `Bonjour,<br><br>Découvrez la sélection de films du mois sur votre application. Bonne séance !`,
+      isPhishing: false, explain: `Simple newsletter informative, sans demande d'informations personnelles ni lien suspect : c'est un email légitime.` },
+    { sender: 'direction@entreprise-corp.co', subject: 'Urgent - virement confidentiel',
+      body: `Bonjour,<br><br>Je suis en déplacement et j'ai besoin que tu effectues un virement de 8 500€ à un nouveau fournisseur avant 17h. Ne préviens pas la comptabilité pour l'instant, je t'expliquerai après. Merci de faire vite.`,
+      isPhishing: true, explain: `Demande de virement urgent, consigne de confidentialité inhabituelle et pression temporelle : c'est le scénario typique d'une fraude au président (BEC).` },
+    { sender: 'securite@clouddrive-app.com', subject: 'Connexion détectée depuis un nouvel appareil',
+      body: `Bonjour,<br><br>Nous avons détecté une connexion depuis un nouvel appareil (Paris, France). Si c'est vous, aucune action n'est nécessaire. Si ce n'est pas vous, changez votre mot de passe depuis l'application officielle.`,
+      isPhishing: false, explain: `Pas de lien cliquable, pas de menace, et la marche à suivre passe par l'application officielle plutôt qu'un lien dans l'email : comportement légitime.` },
+    { sender: 'streamflix-support@streamflix-billing-update.com', subject: 'Échec du paiement — mettez à jour votre carte',
+      body: `Cher abonné,<br><br>Le renouvellement automatique de votre abonnement a échoué. <a class="fakelink">Mettez à jour vos informations de paiement</a> dans les 48h pour éviter une interruption du service.`,
+      isPhishing: true, explain: `Domaine différent du vrai service de streaming, urgence de 48h et lien direct vers une "mise à jour de carte" : un phishing classique visant les données bancaires.` },
+    { sender: 'contact@impots.gouv.fr', subject: 'Votre déclaration a bien été reçue',
+      body: `Bonjour,<br><br>Nous confirmons la bonne réception de votre déclaration de revenus. Vous pouvez suivre son traitement dans votre espace particulier en vous connectant directement sur le site officiel.`,
+      isPhishing: false, explain: `Domaine officiel cohérent, aucune demande de clic ni d'information sensible : c'est un message légitime type.` }
+  ];
+
+  let phishIndex = 0;
+  let phishScore = 0;
+
+  function initPhishingSim() {
+    phishIndex = 0;
+    phishScore = 0;
+    document.getElementById('phish-total').textContent = phishingData.length;
+    document.getElementById('phish-score').textContent = '0';
+    document.getElementById('phish-done').style.display = 'none';
+    renderPhishingQuestion();
+  }
+
+  function renderPhishingQuestion() {
+    const container = document.getElementById('phish-container');
+    if (phishIndex >= phishingData.length) {
+      container.innerHTML = '';
+      document.getElementById('phish-done').style.display = 'block';
+      document.getElementById('phish-final-score').textContent = phishScore + ' / ' + phishingData.length;
+      return;
+    }
+    const item = phishingData[phishIndex];
+    container.innerHTML = `
+      <div class="phish-email">
+        <div class="phish-email-header">
+          <div class="row">De : <span class="val">${item.sender}</span></div>
+          <div class="row">Objet : <span class="val">${item.subject}</span></div>
+        </div>
+        <div class="phish-email-body">${item.body}</div>
+        <div class="phish-buttons">
+          <button class="phish-btn" onclick="answerPhishing(true)">🎣 Phishing</button>
+          <button class="phish-btn" onclick="answerPhishing(false)">✅ Légitime</button>
+        </div>
+        <div class="phish-feedback" id="phish-feedback"></div>
+      </div>
+    `;
+  }
+
+  function answerPhishing(userSaysPhishing) {
+    const item = phishingData[phishIndex];
+    const correct = userSaysPhishing === item.isPhishing;
+    if (correct) phishScore++;
+    document.getElementById('phish-score').textContent = phishScore;
+
+    const fb = document.getElementById('phish-feedback');
+    fb.classList.add('show', correct ? 'correct' : 'wrong');
+    const verdict = item.isPhishing ? "C'était un email de <strong>phishing</strong>." : "C'était un email <strong>légitime</strong>.";
+    fb.innerHTML = `${correct ? '[✓] Bonne réponse !' : '[✗] Raté.'} ${verdict} ${item.explain}<br><br><button class="ai-send-btn" onclick="nextPhishing()">Suivant ▶</button>`;
+
+    document.querySelectorAll('.phish-btn').forEach(b => b.disabled = true);
+  }
+
+  function nextPhishing() {
+    phishIndex++;
+    renderPhishingQuestion();
+  }
+
+  function restartPhishingSim() {
+    initPhishingSim();
+  }
+
+  const quizData = [
+    { q: "Le phishing a pour principal objectif :", opts: ["Protéger les données", "Voler des informations sensibles", "Accélérer Internet", "Installer des mises à jour"], correct: 1, expl: "Le phishing vise à tromper l'utilisateur pour lui voler ses identifiants ou données bancaires." },
+    { q: "Un ransomware (rançongiciel) :", opts: ["Supprime un virus", "Bloque les fichiers et exige une rançon", "Protège les mots de passe", "Améliore la connexion"], correct: 1, expl: "Un ransomware chiffre tes fichiers et demande de l'argent pour les déchiffrer." },
+    { q: "HTTPS signifie que la connexion est :", opts: ["Gratuite", "Anonyme", "Chiffrée et sécurisée", "Très rapide"], correct: 2, expl: "HTTPS (HyperText Transfer Protocol Secure) chiffre les échanges entre ton navigateur et le site." },
+    { q: "La double authentification (2FA) sert à :", opts: ["Ralentir la connexion", "Ajouter une couche de sécurité supplémentaire", "Supprimer les mots de passe", "Partager son compte"], correct: 1, expl: "Le 2FA demande une deuxième vérification (code SMS, app) en plus du mot de passe." },
+    { q: "Un malware est :", opts: ["Un antivirus performant", "Un logiciel malveillant", "Un type de réseau", "Une marque d'ordinateur"], correct: 1, expl: "Malware = malicious software. Terme générique pour virus, trojans, spywares, ransomwares..." },
+    { q: "Une attaque DDoS vise à :", opts: ["Voler des mots de passe", "Rendre un service inaccessible", "Infecter un fichier", "Espionner des emails"], correct: 1, expl: "Un DDoS inonde un serveur de requêtes pour le saturer et le rendre hors service." },
+    { q: "En France, accéder sans autorisation à un système est puni de :", opts: ["Rien, c'est légal", "Un simple avertissement", "2 ans d'emprisonnement minimum", "Seulement une amende de 100€"], correct: 2, expl: "Article 323-1 du Code pénal : 2 ans et 60 000€ d'amende minimum." },
+    { q: "Le meilleur type de mot de passe est :", opts: ["Ton prénom + ta date de naissance", "Une suite courte de chiffres", "Long, complexe, unique par site", "Le même partout pour ne pas oublier"], correct: 2, expl: "Un bon mot de passe est long (16+ caractères), complexe et différent pour chaque service." },
+    { q: "Un Man-in-the-Middle consiste à :", opts: ["Créer un virus", "S'intercaler dans une communication pour l'écouter", "Forcer un mot de passe", "Bloquer un réseau"], correct: 1, expl: "Le MITM positionne l'attaquant entre deux parties pour intercepter ou modifier leurs échanges." },
+    { q: "La cybercriminalité en France est :", opts: ["Tolérée si non répétée", "Punie par la loi, même pour les mineurs", "Autorisée à des fins éducatives", "Seulement punie si l'État est visé"], correct: 1, expl: "La loi s'applique à tous. Les mineurs peuvent aussi être poursuivis avec des sanctions adaptées." },
+    { q: "Le smishing est une attaque de phishing réalisée par :", opts: ["Email", "SMS", "Appel vocal", "Fax"], correct: 1, expl: "Le smishing combine SMS et phishing : faux messages (colis, banque) incitant à cliquer ou rappeler." },
+    { q: "Le cryptojacking consiste à :", opts: ["Voler des crypto-monnaies dans un portefeuille", "Utiliser la puissance de calcul d'un appareil infecté pour miner des cryptos", "Chiffrer des fichiers contre rançon", "Pirater une banque"], correct: 1, expl: "Le cryptojacking détourne la puissance de calcul d'un appareil pour miner des crypto-monnaies à l'insu de la victime." },
+    { q: "Une faille Zero-Day est :", opts: ["Une faille déjà corrigée", "Une faille inconnue de l'éditeur, sans correctif", "Un type de pare-feu", "Une faille uniquement théorique"], correct: 1, expl: "Le Zero-Day désigne une vulnérabilité inconnue de l'éditeur, donc particulièrement dangereuse." },
+    { q: "Le Dark Web est :", opts: ["La totalité d'Internet", "Une partie non indexée d'Internet accessible via des outils spécifiques (ex: Tor)", "Un virus informatique", "Un type de pare-feu"], correct: 1, expl: "Le Dark Web est une portion d'Internet non indexée, accessible via des outils comme Tor." },
+    { q: "Que faut-il faire en priorité si un appareil est infecté par un ransomware ?", opts: ["Payer immédiatement la rançon", "L'isoler du réseau et ne pas payer", "Continuer à l'utiliser normalement", "Le formater sans rien sauvegarder"], correct: 1, expl: "Il faut isoler l'appareil du réseau pour stopper la propagation, et ne jamais payer la rançon." },
+    { q: "Le principe du Zero Trust signifie :", opts: ["Faire confiance à tous les appareils internes", "Ne jamais faire confiance, toujours vérifier", "Supprimer tous les mots de passe", "Désactiver le pare-feu"], correct: 1, expl: "Zero Trust vérifie en continu chaque accès, même venant de l'intérieur du réseau." },
+    { q: "Une attaque de la chaîne d'approvisionnement (supply chain) cible :", opts: ["Directement la victime finale", "Un fournisseur ou composant logiciel utilisé par la victime", "Uniquement les particuliers", "Uniquement les imprimantes"], correct: 1, expl: "L'attaquant compromet un fournisseur ou une dépendance logicielle pour atteindre indirectement ses clients." },
+    { q: "Le RGPD encadre :", opts: ["La vitesse d'Internet", "Le traitement des données personnelles en Europe", "La vente de matériel informatique", "Les jeux vidéo en ligne"], correct: 1, expl: "Le Règlement Général sur la Protection des Données encadre la collecte et l'usage des données personnelles." },
+    { q: "Un pentest (test d'intrusion) est légal lorsqu'il est :", opts: ["Réalisé sans en informer personne", "Autorisé explicitement par écrit par le propriétaire du système", "Réalisé uniquement la nuit", "Fait sur n'importe quel site public"], correct: 1, expl: "Un test d'intrusion n'est légal qu'avec une autorisation écrite explicite, sinon c'est une infraction." },
+    { q: "Un deepfake est :", opts: ["Un type de pare-feu", "Un contenu audio/vidéo truqué par IA imitant une personne réelle", "Un mot de passe très complexe", "Un protocole de chiffrement"], correct: 1, expl: "Le deepfake utilise l'IA générative pour falsifier une voix ou une image, parfois à des fins malveillantes." }
+  ];
+
+
+  let answers = new Array(quizData.length).fill(null);
+
+  function updateScore() {
+    const score = answers.filter((a, i) => a === quizData[i].correct).length;
+    document.getElementById('score-display').textContent = score;
+  }
+
+  function buildQuiz() {
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = '';
+    quizData.forEach((item, qi) => {
+      const div = document.createElement('div');
+      div.className = 'quiz-q';
+      div.innerHTML = `
+        <div class="quiz-q-text"><span class="quiz-q-num">${String(qi+1).padStart(2,'0')}.</span> ${item.q}</div>
+        <div class="quiz-options">
+          ${item.opts.map((o, oi) => `<button class="quiz-opt" data-qi="${qi}" data-oi="${oi}">${o}</button>`).join('')}
+        </div>
+        <div class="quiz-feedback" id="fb-${qi}"></div>
+      `;
+      container.appendChild(div);
+    });
+
+    container.querySelectorAll('.quiz-opt').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const qi = parseInt(this.dataset.qi);
+        const oi = parseInt(this.dataset.oi);
+        if (answers[qi] !== null) return;
+        answers[qi] = oi;
+
+        const opts = container.querySelectorAll(`[data-qi="${qi}"]`);
+        opts.forEach(o => {
+          const idx = parseInt(o.dataset.oi);
+          if (idx === quizData[qi].correct) o.classList.add('correct');
+          else if (idx === oi) o.classList.add('wrong');
+          o.disabled = true;
+        });
+
+        const fb = document.getElementById(`fb-${qi}`);
+        fb.classList.add('show');
+        if (oi === quizData[qi].correct) {
+          fb.classList.add('ok');
+          fb.textContent = `[✓] Correct ! ${quizData[qi].expl}`;
+        } else {
+          fb.classList.add('ko');
+          fb.textContent = `[✗] Incorrect. ${quizData[qi].expl}`;
+        }
+        updateScore();
+      });
+    });
+  }
+
+  // =================== IA ASSISTANT ===================
+  const aiMessages = document.getElementById('ai-messages');
+  const aiInput = document.getElementById('ai-input');
+  const aiSendBtn = document.getElementById('ai-send-btn');
+  let conversationHistory = [];
+
+  function handleKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  }
+
+  function askSuggestion(text) {
+    aiInput.value = text;
+    sendMessage();
+  }
+
+  function appendMessage(role, html) {
+    const div = document.createElement('div');
+    div.className = `ai-msg ${role === 'user' ? 'user' : 'bot'}`;
+    div.innerHTML = `
+      <div class="ai-msg-avatar">${role === 'user' ? 'TOI' : 'AI'}</div>
+      <div class="ai-msg-bubble">${html}</div>
+    `;
+    aiMessages.appendChild(div);
+    aiMessages.scrollTop = aiMessages.scrollHeight;
+    return div;
+  }
+
+  function showTyping() {
+    const div = document.createElement('div');
+    div.className = 'ai-msg bot';
+    div.id = 'ai-typing-indicator';
+    div.innerHTML = `
+      <div class="ai-msg-avatar">AI</div>
+      <div class="ai-typing"><span></span><span></span><span></span></div>
+    `;
+    aiMessages.appendChild(div);
+    aiMessages.scrollTop = aiMessages.scrollHeight;
+  }
+
+  function removeTyping() {
+    const t = document.getElementById('ai-typing-indicator');
+    if (t) t.remove();
+  }
+
+  function formatResponse(text) {
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/\n\n/g, '<br><br>')
+      .replace(/\n/g, '<br>')
+      .replace(/^[-•]\s(.+)/gm, '• $1');
+  }
+
+  async function sendMessage() {
+    const text = aiInput.value.trim();
+    if (!text || aiSendBtn.disabled) return;
+
+    aiInput.value = '';
+    aiSendBtn.disabled = true;
+    document.getElementById('ai-suggestions').style.display = 'none';
+
+    appendMessage('user', text);
+    conversationHistory.push({ role: 'user', content: text });
+
+    showTyping();
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 1000,
+          system: `Tu es un expert en cybersécurité et cybercriminalité intégré dans le guide de Sohail.
+Réponds UNIQUEMENT aux questions sur : cybersécurité, cybercriminalité, attaques informatiques (phishing, ransomware, malware, DDoS, MITM, SQL injection, brute force, deepfake, supply chain, cryptojacking, ingénierie sociale...), protection numérique, mots de passe, chiffrement, vie privée en ligne, lois françaises et internationales sur la cybercriminalité (articles 323-1, 323-2, RGPD, etc.), Dark Web, historique des cyberattaques majeures, outils de sécurité, carrières et certifications en cybersécurité, bonnes pratiques.
+
+Si la question est hors sujet, indique poliment que tu es spécialisé en cybersécurité/cybercriminalité.
+
+Sois clair, pédagogique et concis. Utilise des **mots en gras** pour les termes importants. Format: réponses structurées mais conversationnelles. Réponds toujours en français.`,
+          messages: conversationHistory
+        })
+      });
+
+      removeTyping();
+
+      if (!response.ok) throw new Error('API error');
+
+      const data = await response.json();
+      const reply = data.content.map(b => b.text || '').join('');
+
+      conversationHistory.push({ role: 'assistant', content: reply });
+      appendMessage('bot', formatResponse(reply));
+    } catch (err) {
+      removeTyping();
+      appendMessage('bot', '⚠️ Une erreur est survenue. Vérifie ta connexion et réessaie.');
+      conversationHistory.pop();
+    }
+
+    aiSendBtn.disabled = false;
+    aiInput.focus();
+  }
+
+  buildQuiz();
+  buildGlossary(glossaryData);
+  buildAttacks();
+</script>
+</body>
+</html>
